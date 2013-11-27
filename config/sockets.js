@@ -47,7 +47,12 @@ module.exports.sockets = {
 
   // Use this option to set the datastore socket.io will use to manage rooms/sockets/subscriptions:
   // default: memory
-  adapter: 'memory',
+  adapter: 'redis',
+  host:process.env.REDISTOGO_HOST || null,
+  port:process.env.REDISTOGO_PORT || null,
+  pass:process.env.REDISTOGO_PASS || null,
+  db: process.env.REDISTOGO_DB || 'deadpeople',
+
 
   
   // Node.js (and consequently Sails.js) apps scale horizontally.
