@@ -6,14 +6,37 @@
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
 
+var validation = require('../../lib/validation.js');
+
 module.exports = {
 
+  types:{
+    model:validation.is_model,
+    tags:validation.is_tags,
+    comment:validation.is_comment
+  },
+
   attributes: {
-  	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
-    
+  	category:{
+      type:"string",
+      model:'category',
+      default:null
+    },
+    tags:{
+      type:"array",
+      tags:true
+    },
+    big_image:{
+      type:'string`'
+    },
+    small_image:{
+      type:'string'
+    },
+    comments:{
+      type:"array",
+      comment:true
+    }
+
   }
 
 };

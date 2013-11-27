@@ -20,7 +20,8 @@ module.exports.adapters = {
 
   mongo:{
     module:'sails-mongo',
-    schema:true
+    schema:true,
+    url:process.env.MONGOHQ_URL || "deadpeople"
   },
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
