@@ -23,6 +23,10 @@ module.exports.adapters = {
     schema:true,
     url:process.env.MONGOHQ_URL || "deadpeople"
   },
+  redis:{
+    module:'sails-redis',
+    url:process.env.REDISTOGO_URL || "deadpeople"
+  },
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
   disk: {
