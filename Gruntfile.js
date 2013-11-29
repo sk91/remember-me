@@ -45,7 +45,9 @@ module.exports = function (grunt) {
 
     // Below, as a demonstration, you'll see the built-in dependencies 
     // linked in the proper order order
-
+    'linker/js/jquery.js',
+    'linker/js/chui-3.0.6.js',
+    'linker/js/handlebars.runtime.js',
     // Bring in the socket.io client
     'linker/js/socket.io.js',
 
@@ -55,6 +57,7 @@ module.exports = function (grunt) {
     // A simpler boilerplate library for getting you up and running w/ an
     // automatic listener for incoming messages from Socket.io.
     'linker/js/app.js',
+    'linker/js/mobile.js',
 
     // *->    put other dependencies here   <-*
 
@@ -74,7 +77,7 @@ module.exports = function (grunt) {
    */
 
   var templateFilesToInject = [
-    'linker/**/*.html'
+    'linker/**/*.hbs'
   ];
 
 
@@ -127,7 +130,7 @@ module.exports = function (grunt) {
   grunt.loadTasks(depsPath + '/grunt-contrib-copy/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-concat/tasks');
   grunt.loadTasks(depsPath + '/grunt-sails-linker/tasks');
-  grunt.loadTasks(depsPath + '/grunt-contrib-jst/tasks');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadTasks(depsPath + '/grunt-contrib-watch/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-uglify/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-cssmin/tasks');
@@ -166,15 +169,15 @@ module.exports = function (grunt) {
       build: ['www']
     },
 
-    jst: {
+    handlebars: {
       dev: {
 
-        // To use other sorts of templates, specify the regexp below:
-        // options: {
-        //   templateSettings: {
-        //     interpolate: /\{\{(.+?)\}\}/g
-        //   }
-        // },
+        
+        options: {
+          processName:function(filename){
+            return filename.split(/(\\|\/)/g).pop().replace(".hbs","");
+          }
+        },
 
         files: {
           '.tmp/public/jst.js': templateFilesToInject
@@ -421,7 +424,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('compileAssets', [
     'clean:dev',
-    'jst:dev',
+    'handlebars:dev',
     'less:dev',
     'copy:dev',    
     'coffee:dev'
@@ -451,7 +454,7 @@ module.exports = function (grunt) {
   // When sails is lifted in production
   grunt.registerTask('prod', [
     'clean:dev',
-    'jst:dev',
+    'handlebars:dev',
     'less:dev',
     'copy:dev',
     'coffee:dev',

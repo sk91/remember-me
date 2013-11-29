@@ -1,0 +1,20 @@
+mobile.initSlideout([
+  {
+    "main":"Main"
+  },
+  {
+    "wizard":"Wizard"
+  },
+  {
+    "information":"Information"
+  },
+  {
+    "services":"Services"
+  },
+  {
+    "account":"Account"
+  },
+  {
+    "logout":"Log out"
+  }
+]);

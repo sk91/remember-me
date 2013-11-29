@@ -34,7 +34,9 @@ module.exports.routes = {
   // (This would also work if you had a file at: `/views/home.ejs`)
   '/': {
     view: 'home/index'
-  }
+  },
+  'post /login':'SessionController.login',
+  'get /logout':'SessionController.logout',
 
   /*
   // But what if you want your home page to display
@@ -49,7 +51,8 @@ module.exports.routes = {
   // In this scenario, you have a custom controller `MessageController`
   // with an `inbox` action.
   '/': 'MessageController.inbox'
-
+  
+ 
 
   // Alternatively, you can use the more verbose syntax:
   '/': {

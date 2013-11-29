@@ -24,7 +24,17 @@ module.exports = {
    * Overrides for the settings in `config/controllers.js`
    * (specific to SessionController)
    */
-  _config: {}
+  _config: {
+    blueprints:false
+  },
+
+  login: function(req,res){
+    res.send('login');
+  },
+
+  logout: function(req,res){
+    res.send('logut');
+  }
 
   
 };
