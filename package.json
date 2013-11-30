@@ -12,7 +12,8 @@
     "sails-mongo": "~0.9.6"
   },
   "scripts": {
-    "start": "node ./node_modules/sails/bin/sails.js lift",
+    "start": "node app.js",
+    "install": "grunt prod",
     "debug": "node debug app.js"
   },
   "main": "app.js",
