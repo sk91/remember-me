@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "postinstall": "echo postinstall time; ./node_modules/grunt/bin/grunt prod",
+    "postinstall": "npm install -g grunt-cli; grunt prod",
     "debug": "node debug app.js"
   },
   "main": "app.js",
