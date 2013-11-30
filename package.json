@@ -12,7 +12,7 @@
     "sails-mongo": "~0.9.6"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "node ./node_modules/sails/bin/sails.js lift",
     "debug": "node debug app.js"
   },
   "main": "app.js",
