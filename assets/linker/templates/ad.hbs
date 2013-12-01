@@ -1,0 +1,11 @@
+<nav class="next"><a   class="button back" >Ads</a><h1>Ad about {{name}}</h1></nav>
+<article id="ad{{id}}" class='next'>
+	<section>
+		{{#with deceased}}
+				{{name}} {{last_name}}
+				{{../ad.type}}
+			{{/with}}
+
+			{{ad.type}}
+	</section>
+</article>
