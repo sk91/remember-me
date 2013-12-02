@@ -24,6 +24,7 @@
 
     function ad_list_controller($scope,Ad){
       $scope.ads = Ad.query();
+      console.log($scope.ads);
     }
 
 

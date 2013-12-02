@@ -25,7 +25,7 @@ module.exports = {
     },
     last_name:{
       type:'string',
-      minLenght:2,
+      minLength:2,
       required:true
     },
     photo:{

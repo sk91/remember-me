@@ -9,25 +9,24 @@
 <div class="topcoat-list__container scroller" style="top:138px;">
     <ul class="topcoat-list list ads-list">
         <li ng-repeat="ad in ads | filter:query | orderBy:orderProp" class="topcoat-list__item ">
-            <a ng-click="" ng-if="ad.ad.type=='deceased'">
+            <a ng-click="" ng-if="ad.ad.type=='deceased'" class="deceased">
                 <img ng-src="{{ad.deceased.photo}}" >
-                hello
-                <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
-                <p>{{ad.deceased.title}}</p>
+                <p>{{ad.deceased.last_name}} {{ad.deceased.name}}</p>
+                <p>{{ad.deceased.birth_date | date:'yyyy'}}-{{ad.deceased.death_date | date: 'yyyy'}}</p>
                 <span class="chevron"></span><span class="count"></span>
             </a>
-             <a ng-click="" ng-if="ad.ad.type=='obit'">
+             <a ng-click="" ng-if="ad.ad.type=='obit'" class="obit">
                 <img ng-src="{{ad.deceased.photo}}" >
-                obit
                 <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
-                <p>{{ad.deceased.title}}</p>
+                <p>{{ad.ad.message}}</p>
                 <span class="chevron"></span><span class="count"></span>
             </a>
-             <a ng-click="" ng-if="ad.ad.type=='sympathy'">
+             <a ng-click="" ng-if="ad.ad.type=='sympathy'" class="sympathy">
                 <img ng-src="{{ad.deceased.photo}}" >
-                sympathy
+                <img ng-src="{{ad.ad.from.photo}}">
                 <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
-                <p>{{ad.deceased.title}}</p>
+                <p>{{ad.ad.message}}</p>
+                <p>From: {{ad.ad.from.last_name}} {{ad.ad.from.name}}</p>
                 <span class="chevron"></span><span class="count"></span>
             </a>
         </li>

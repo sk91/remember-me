@@ -140,7 +140,7 @@ ul {
 }
 
 .icon-call {
-    background: transparent url(images/call.svg);
+    background: transparent url(../img/call.svg);
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -148,7 +148,7 @@ ul {
 }
 
 .icon-sms {
-    background: transparent url(images/chat.svg);
+    background: transparent url(../img/chat.svg);
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -156,7 +156,7 @@ ul {
 }
 
 .icon-mail {
-    background: transparent url(images/email.svg);
+    background: transparent url(../img/email.svg);
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -164,7 +164,7 @@ ul {
 }
 
 .icon-manager {
-    background: transparent url(images/next.svg);
+    background: transparent url(../img/next.svg);
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -172,7 +172,7 @@ ul {
 }
 
 .icon-reports {
-    background: transparent url(images/next.svg);
+    background: transparent url(../img/next.svg);
     background-repeat: no-repeat;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -180,7 +180,7 @@ ul {
 }
 
 .chevron {
-    background: transparent url(images/next_blue.svg);
+    background: transparent url(../img/next_blue.svg);
     background-repeat: no-repeat;
     background-size: contain;
     width: 20px;
@@ -247,4 +247,28 @@ ul {
 .slide-right.ng-leave.ng-leave-active {
     -webkit-transform: translateX(100%);
     transform: translateX(100%);
+}
+
+
+
+
+
+
+
+.list > li > a.obit{
+    height:300px;
+}
+.list > li > a.obit img{
+    width:100%;
+    height:70%;
+    text-align: center;
+}
+
+.list > li > a.sympathy{
+    height:300px;
+}
+
+.list > li > a.sympathy img {
+    width:45%;
+    height:70%;
 }
