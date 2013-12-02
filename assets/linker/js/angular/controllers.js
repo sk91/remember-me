@@ -9,7 +9,6 @@
 
     function main_controller($scope,$rootScope,$window,$location){
       $scope.slide='';
-      console.log('hi');
       $rootScope.back = function(){
         $scope.slide = 'slide-right';
         $window.history.back();

@@ -14,7 +14,7 @@
     "grunt-angular-templates": "~0.4.7"
   },
   "scripts": {
-    "start": "./node_modules/.bin/sails lift",
+    "start": "./node_modules/.bin/sails lift --production",
     "postinstall": "./node_modules/.bin/grunt prod",
     "debug": "node debug app.js"
   },
