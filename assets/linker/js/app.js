@@ -76,15 +76,18 @@
   'use strict';
 
   angular.module("MyApp", [
-  //  'ngTouch',
+    'ngTouch',
     'ngRoute',
-//    'ngAnimate',
+    'ngAnimate',
     'MyApp.controllers',
     'MyApp.restServices'
   ]).
   config(['$routeProvider',function($routeProvider){
-    $routeProvider.when('/list',{templateUrl:'main',controller:"AdListCtrl"});
-    $routeProvider.otherwise({redirectTo: '/list'});
+    $routeProvider.when('/ads',{templateUrl:'ads',controller:"AdsCtrl"});
+    $routeProvider.when('/ads/:id',{templateUrl:'ad',controller:"AdDetailsCtrl"})
+    $routeProvider.when('/deceased/:id',{templateUrl:'deceased_profile',controller:"DeceasedProfileCtrl"})
+    $routeProvider.when('/information',{template:"Information"});
+    $routeProvider.otherwise({redirectTo: '/ads'});
   }]);
 
 })(window.angular)

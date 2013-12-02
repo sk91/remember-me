@@ -7,4 +7,9 @@
           return $resource("/ads/:id",{});
         }
       ])
+    .factory("Deceased",['$resource',
+        function($resource){
+          return $resource("/deceaseds/:id",{});
+        }
+      ])
 })(angular);  
