@@ -1,5 +1,0 @@
-mobile.initSlideout([
-  {
-    "main":"Main"
-  }
-]);

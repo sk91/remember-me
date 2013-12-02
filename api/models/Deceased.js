@@ -68,7 +68,7 @@ module.exports = {
       type:'json',
       location:true
     },
-    responsible_user:{
+    responsible:{
       type:'string',
       model:"user"
     }

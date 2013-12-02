@@ -29,6 +29,7 @@ module.exports = function (grunt) {
    */
 
   var cssFilesToInject = [
+    'linker/styles/topcoat-*-*.css',
     'linker/**/*.css'
   ];
 
@@ -41,23 +42,21 @@ module.exports = function (grunt) {
    * `sails-linker:devJs` task below for more options.
    */
 
-  var jsFilesToInject = [
+  var jsFilesToInject =[
 
     // Below, as a demonstration, you'll see the built-in dependencies 
     // linked in the proper order order
-    'linker/js/jquery.js',
-    'linker/js/chui-3.0.6.js',
-    'linker/js/handlebars.runtime.js',
+    'linker/js/lib/jquery.js',
+    'linker/js/lib/angular.js',
     // Bring in the socket.io client
-    'linker/js/socket.io.js',
+    'linker/js/lib/socket.io.js',
 
     // then beef it up with some convenience logic for talking to Sails.js
-    'linker/js/sails.io.js',
-
-    // A simpler boilerplate library for getting you up and running w/ an
-    // automatic listener for incoming messages from Socket.io.
+    'linker/js/lib/sails.io.js',
+    'linker/js/lib/*.js',
     'linker/js/app.js',
-    'linker/js/mobile.js',
+    'linker/js/angular/*.js',
+
 
     // *->    put other dependencies here   <-*
 
@@ -77,9 +76,8 @@ module.exports = function (grunt) {
    */
 
   var templateFilesToInject = [
-    'linker/**/*.hbs'
+    'linker/**/*.html'
   ];
-
 
 
   /////////////////////////////////////////////////////////////////
@@ -130,7 +128,7 @@ module.exports = function (grunt) {
   grunt.loadTasks(depsPath + '/grunt-contrib-copy/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-concat/tasks');
   grunt.loadTasks(depsPath + '/grunt-sails-linker/tasks');
-  grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadTasks(depsPath + '/grunt-contrib-watch/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-uglify/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-cssmin/tasks');
@@ -169,18 +167,16 @@ module.exports = function (grunt) {
       build: ['www']
     },
 
-    handlebars: {
-      dev: {
+    ngtemplates: {
+      MyApp: {
 
-        
+        src:templateFilesToInject,
+        dest: '.tmp/public/partials.js',
         options: {
-          processName:function(filename){
-            return filename.split(/(\\|\/)/g).pop().replace(".hbs","");
+          htmlmin:  { collapseWhitespace: true, collapseBooleanAttributes: true },
+          url:function(filename){
+            return filename.match(/^assets\/linker\/templates\/(.*)\.html$/)[1];
           }
-        },
-
-        files: {
-          '.tmp/public/jst.js': templateFilesToInject
         }
       }
     },
@@ -322,9 +318,9 @@ module.exports = function (grunt) {
           appRoot: '.tmp/public'
         },
         files: {
-          '.tmp/public/index.html': ['.tmp/public/jst.js'],
-          'views/**/*.html': ['.tmp/public/jst.js'],
-          'views/**/*.ejs': ['.tmp/public/jst.js']
+          '.tmp/public/index.html': ['.tmp/public/partials.js'],
+          'views/**/*.html': ['.tmp/public/partials.js'],
+          'views/**/*.ejs': ['.tmp/public/partials.js']
         }
       },
 
@@ -390,7 +386,7 @@ module.exports = function (grunt) {
           appRoot: '.tmp/public'
         },
         files: {
-          'views/**/*.jade': ['.tmp/public/jst.js']
+          'views/**/*.jade': ['.tmp/public/partials.js']
         }
       }
       /************************************
@@ -424,7 +420,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('compileAssets', [
     'clean:dev',
-    'handlebars:dev',
+    'ngtemplates:MyApp',
     'less:dev',
     'copy:dev',    
     'coffee:dev'
@@ -454,8 +450,8 @@ module.exports = function (grunt) {
   // When sails is lifted in production
   grunt.registerTask('prod', [
     'clean:dev',
-    'handlebars:dev',
-    'less:dev',
+    'ngtemplates:MyApp',
+    'less:dev', 
     'copy:dev',
     'coffee:dev',
     'concat',

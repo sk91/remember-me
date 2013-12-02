@@ -69,3 +69,22 @@
   window.io
 
 );
+
+
+
+(function(angular){
+  'use strict';
+
+  angular.module("MyApp", [
+  //  'ngTouch',
+    'ngRoute',
+//    'ngAnimate',
+    'MyApp.controllers',
+    'MyApp.restServices'
+  ]).
+  config(['$routeProvider',function($routeProvider){
+    $routeProvider.when('/list',{templateUrl:'main',controller:"AdListCtrl"});
+    $routeProvider.otherwise({redirectTo: '/list'});
+  }]);
+
+})(angular)

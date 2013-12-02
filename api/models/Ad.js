@@ -19,7 +19,7 @@ module.exports = {
 
   attributes: {
   	author: {
-  		type:"string",
+  		type:"json",
   		required:true,
       model:'user'
   	},

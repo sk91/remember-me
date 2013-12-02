@@ -1,0 +1,35 @@
+<div class="topcoat-navigation-bar">
+    <div class="topcoat-navigation-bar__item center full">
+        <h1 class="topcoat-navigation-bar__title">Dead people</h1>
+    </div>
+</div>
+<div class="search-bar">
+    <input ng-model="query" type="search" placeholder="search" class="topcoat-search-input search-key">
+</div>
+<div class="topcoat-list__container scroller" style="top:138px;">
+    <ul class="topcoat-list list ads-list">
+        <li ng-repeat="ad in ads | filter:query | orderBy:orderProp" class="topcoat-list__item ">
+            <a ng-click="" ng-if="ad.ad.type=='deceased'">
+                <img ng-src="{{ad.deceased.photo}}" >
+                hello
+                <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
+                <p>{{ad.deceased.title}}</p>
+                <span class="chevron"></span><span class="count"></span>
+            </a>
+             <a ng-click="" ng-if="ad.ad.type=='obit'">
+                <img ng-src="{{ad.deceased.photo}}" >
+                obit
+                <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
+                <p>{{ad.deceased.title}}</p>
+                <span class="chevron"></span><span class="count"></span>
+            </a>
+             <a ng-click="" ng-if="ad.ad.type=='sympathy'">
+                <img ng-src="{{ad.deceased.photo}}" >
+                sympathy
+                <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
+                <p>{{ad.deceased.title}}</p>
+                <span class="chevron"></span><span class="count"></span>
+            </a>
+        </li>
+    </ul>
+</div>
