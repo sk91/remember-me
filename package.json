@@ -11,7 +11,6 @@
     "sails": "~0.9.7",
     "sails-mongo": "~0.9.6",
     "grunt-cli": "~0.1.11",
-    "grunt-contrib-handlebars": "~0.6.0",
     "grunt-angular-templates": "~0.4.7"
   },
   "scripts": {
