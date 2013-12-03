@@ -49,6 +49,7 @@ module.exports = function (grunt) {
     // linked in the proper order order
     'linker/js/lib/jquery.js',
     'linker/js/lib/angular.js',
+
     // Bring in the socket.io client
     'linker/js/lib/socket.io.js',
 
