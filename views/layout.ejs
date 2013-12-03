@@ -1,32 +1,11 @@
 <!DOCTYPE html>
 <html ng-app="MyApp">
   <head >
-    <title><%- title %></title>
-
-    <!-- Viewport mobile tag for sensible mobile support -->
+    <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    
-    <!--  
-        Stylesheets and Preprocessors
-        ==============================
-
-        You can always bring in CSS files manually with `link` tags, or asynchronously
-        on the client using a solution like AMD (RequireJS).  Or, if you like, you can
-        take advantage of Sails' boilerplate asset management.
-
-        By default, stylesheets from your `assets/linker/styles` folder are included
-        here automatically.  Both CSS (.css) and LESS (.less) are supported.
-        In production, your styles will be minified and concatenated into a single file.
-        
-        To customize any part of the built-in behavior, just edit your Gruntfile.
-        For example, here are a few things you could do:
-            
-            + Change the order of your CSS files
-            + Import stylesheets from other directories
-            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
-    -->
     <!--STYLES-->
+    <link rel="stylesheet" href="/linker/styles/icomatic.css">
     <link rel="stylesheet" href="/linker/styles/topcoat-mobile-dark.css">
     <link rel="stylesheet" href="/linker/styles/app.css">
     <!--STYLES END-->
@@ -35,8 +14,8 @@
   <body ng-controller="MainCtrl" ng-class="nav">
   <div class="topcoat-navigation-bar">
     <div class="topcoat-navigation-bar__item left quarter">
-        <a class="topcoat-icon-button back-button" href="" ng-click="toggle_menu()">
-            <span class="topcoat-icon topcoat-icon--menu-stack"></span>
+        <a class="topcoat-icon-button back-button"  href="" ng-click="toggle_menu()">
+            <div class="topcoat-icon icomatic">listview</div>
         </a>
     </div>
     <div class="topcoat-navigation-bar__item center half">
@@ -44,12 +23,13 @@
     </div>
     <div class="topcoat-navigation-bar__item right quarter">
         <a class="topcoat-icon-button back-button" href="" ng-click="back()">
-            <span class="topcoat-icon topcoat-icon--back"></span>
+            <span class="topcoat-icon icomatic">back</span>
         </a>    
     </div>
 
    
 </div>
+
 <nav class="side-nav">
         <div class="topcoat-list__container side-nav__list__container">
             <ul class="topcoat-list side-nav__list">
@@ -84,6 +64,7 @@
     <script src="/linker/js/lib/angular-resource.js"></script>
     <script src="/linker/js/lib/angular-route.js"></script>
     <script src="/linker/js/lib/angular-touch.js"></script>
+    <script src="/linker/js/lib/icomatic.js"></script>
     <script src="/linker/js/angular/controllers.js"></script>
     <script src="/linker/js/angular/rest-services.js"></script>
     <script src="/linker/js/app.js"></script>

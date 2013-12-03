@@ -29,6 +29,7 @@ module.exports = function (grunt) {
    */
 
   var cssFilesToInject = [
+    'linker/styles/icomatic.css',
     'linker/styles/topcoat-*-*.css',
     'linker/**/*.css'
   ];

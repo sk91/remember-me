@@ -253,8 +253,8 @@ ul {
 
 
 
-/*
-.list > li > a.obit{
+
+/*.list > li > a.obit{
     height:300px;
 }
 .list > li > a.obit img{
@@ -350,3 +350,9 @@ body.left-nav .topcoat-navigation-bar, body.left-nav .main-content {
         width:auto;
     }
 }*/
+
+
+
+.topcoat-icon{
+    font-size:1.62rem;
+}
