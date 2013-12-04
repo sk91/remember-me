@@ -1,51 +1,27 @@
 <!DOCTYPE html>
 <html ng-app="MyApp">
   <head >
-    <title>{{title}}</title>
+    <title>Dead people</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <!--STYLES-->
-    <link rel="stylesheet" href="/min/production.css">
+    <link rel="stylesheet" href="/linker/styles/icomatic.css">
+    <link rel="stylesheet" href="/linker/styles/topcoat-mobile-light.css">
+    <link rel="stylesheet" href="/linker/styles/app-light.css">
     <!--STYLES END-->
   </head>
 
   <body ng-controller="MainCtrl" ng-class="nav">
-  <div class="topcoat-navigation-bar">
-    <div class="topcoat-navigation-bar__item left quarter">
-        <a class="topcoat-icon-button back-button"  href="" ng-click="toggle_menu()">
-            <div class="topcoat-icon icomatic">listview</div>
-        </a>
-    </div>
-    <div class="topcoat-navigation-bar__item center half">
-        <h1 class="topcoat-navigation-bar__title">{{title}}</h1>
-    </div>
-    <div class="topcoat-navigation-bar__item right quarter">
-        <a class="topcoat-icon-button back-button" href="" ng-click="back()">
-            <span class="topcoat-icon icomatic">back</span>
-        </a>    
-    </div>
 
-   
-</div>
+  
+        <div class="topcoat-navigation-bar" ng-include src="'nav-bar'"></div>
 
-<nav class="side-nav">
-        <div class="topcoat-list__container side-nav__list__container">
-            <ul class="topcoat-list side-nav__list">
-                <li ng-class="isActive('/ads')" class="topcoat-list__item side-nav__list__item " >
-                    <a ng-click="go('/ads')"  class="side-nav__button">Main</a>
-                </li>
-                <li ng-class="isActive('/information')" class="topcoat-list__item side-nav__list__item">
-                    <a ng-click="go('/information')" class="side-nav__button">Information</a>
-                </li>
-                <li ng-class="isActive('/services')" class="topcoat-list__item side-nav__list__item">
-                    <a ng-click="go('/services')" class="side-nav__button">Services</a>
-                </li>
-            </ul>
+        <nav class="side-nav" ng-include src="'side-nav'"></nav>
+        
+        <div class="main-content">
+            <div ng-view ng-class="slide" class="pages"></div>
         </div>
-</nav>
-<div class="main-content">
-    <div ng-view ng-class="slide" class="pages"></div> 
-</div>
+
 
     
 
@@ -54,7 +30,19 @@
 
 
     <!--SCRIPTS-->
-    <script src="/min/production.js"></script>
+    <script src="/linker/js/lib/jquery.js"></script>
+    <script src="/linker/js/lib/angular.js"></script>
+    <script src="/linker/js/lib/socket.io.js"></script>
+    <script src="/linker/js/lib/sails.io.js"></script>
+    <script src="/linker/js/lib/angular-animate.js"></script>
+    <script src="/linker/js/lib/angular-resource.js"></script>
+    <script src="/linker/js/lib/angular-route.js"></script>
+    <script src="/linker/js/lib/angular-touch.js"></script>
+    <script src="/linker/js/lib/icomatic.js"></script>
+    <script src="/linker/js/lib/lodush.js"></script>
+    <script src="/linker/js/angular/controllers.js"></script>
+    <script src="/linker/js/angular/rest-services.js"></script>
+    <script src="/linker/js/app.js"></script>
     <!--SCRIPTS END-->
 
      <!--TEMPLATES-->

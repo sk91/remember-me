@@ -29,7 +29,7 @@ module.exports = {
       model:'deceased'
   	},
 
-    ad:{
+    deatails:{
       type:'json',
       ad:true
     }

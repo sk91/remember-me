@@ -1,0 +1,22 @@
+    <div class="topcoat-navigation-bar__item nav-buttons-left">
+        <a class="topcoat-icon-button--quiet menu"  href="" ng-click="toggle_menu()">
+            <div class="topcoat-icon icomatic">listview</div>
+        </a>
+    </div>
+      <div class="topcoat-navigation-bar__item nav-buttons-right">
+        <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.back" ng-click="back()">
+            <span class="topcoat-icon icomatic">back</span>
+        </a> 
+        <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.add" ng-click="go('/ads/new')">
+            <span class="topcoat-icon icomatic">plus</span>
+        </a>
+        <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.filter" ng-click="toogleFilter()">
+            <span class="topcoat-icon icomatic">tileview</span>
+        </a>
+          <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.cancel" ng-click="back()">
+            <span class="topcoat-icon icomatic">cancel</span>
+        </a>    
+    </div>
+    <div class="topcoat-navigation-bar__item pull-center">
+        <h1 class="topcoat-navigation-bar__title">{{title}}</h1>
+    </div>
