@@ -21,17 +21,17 @@ module.exports = {
   attributes: {
   	name:{
       type:"string",
-      minLenght:2,
+      minLength:2,
       required:true
     },
     last_name:{
       type:"string",
-      minLenght:2,
+      minLength:2,
       required:true
     },
     middle_name:{
       type:"string",
-      minLenght:2
+      minLength:2
     },
     passport:{
       type:"string",

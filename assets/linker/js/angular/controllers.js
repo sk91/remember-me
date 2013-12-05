@@ -7,7 +7,10 @@
     .controller('AdsCtrl',['$scope','$rootScope','Ad',ads_controller])
     .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', ad_details_controller])
     .controller('NewAdCtrl',['$scope','$rootScope','Ad',new_ad_controller])
-    .controller('DeceasedProfileCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_profile])
+    .controller('CreateObitCtrl',['$scope','$rootScope','Ad',create_obit_controller])
+    .controller('CreateSympathyCtrl',['$scope','$rootScope','Ad',create_sympathy_controller])
+    .controller('DeceasedProfileCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_profile_controller])
+    .controller('DeceasedEditCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_edit_controller])
     .controller("DeceasedChooserCtrl",['$scope',"$rootScope",'Deceased',deceased_chooser_controller])
     .controller('ArticleCtrl',['$scope','$rootScope','$routeParams','Category', 'Article',article_controller])
     .controller('AccountCtrl',['$scope','$rootScope',account_controller])
@@ -117,8 +120,22 @@
     function new_ad_controller($scope,$rootScope,Ad){
       $rootScope.resetButtons(['cancel']);
       $rootScope.title ="Write ad"
+
+      $scope.createDeceased = function(){
+        alert('Create new deceased');
+      }
     }
-  
+    
+
+    function create_obit_controller($scope,$rootScope,Ad){
+      $rootScope.resetButtons(['back']);
+      $rootScope.title ="Create obit ad";
+    }
+
+    function create_sympathy_controller($scope,$rootScope,Ad){
+      $rootScope.resetButtons(['back']);
+      $rootScope.title ="Create sympathy ad";
+    }
 
     function ad_details_controller($scope,$rootScope,$routeParams,Ad){
       $rootScope.resetButtons(['back']);
@@ -137,7 +154,12 @@
       
     }
 
-    function deceased_profile($scope,$rootScope,$routeParams,Deceased){
+    function deceased_profile_controller($scope,$rootScope,$routeParams,Deceased){
+      $rootScope.resetButtons(['back']);
+      $scope.deceased = Deceased.get({id:$routeParams.id});
+      $rootScope.title = "Deceased edit";
+    }
+     function deceased_edit_controller($scope,$rootScope,$routeParams,Deceased){
       $rootScope.resetButtons(['back']);
       $scope.deceased = Deceased.get({id:$routeParams.id});
       $rootScope.title = "Deceased profile";

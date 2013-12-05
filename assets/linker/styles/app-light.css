@@ -364,10 +364,4 @@ body.left-nav  .topcoat-icon-button--quiet.menu{
 .tabs .topcoat-tab-bar{
     margin:0px auto;
 }
-
-.person-chooser{
-    position:absolute;
-    z-index:101;
-    width:100%;
-    height: 100%;
-}
+d

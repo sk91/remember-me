@@ -4,4 +4,23 @@
 <div ng-if="personChooser.chosen !== null">
 	<h2>You chouse:</h2>
 	{{personChooser.chosen.name}} {{personChooser.chosen.last_name}}
+
+	<button ng-click="go('/deceased/{{personChooser.chosen.id}}/edit')">Edit profile</button>
+	<button ng-click="go('/ads/create/obit/{{personChooser.chosen.id}}')">Write obit</button>
+	<button ng-click="go('/ads/create/sympathy/{{personChooser.chosen.id}}')">Edit profile</button>
+
 </div>
+
+
+<div ng-if="personChooser.chosen === null">
+	<h1>Please tell us about him</h1>
+	<input type="text" placeholder="Name"/>
+	<input type="text" placeholder="Last name"/>
+	<select name="" id="">
+		<option value="">Gender</option>
+		<option value="m">Male</option>
+		<option value="f">Femaile</option>
+	</select>
+	<button ng-click="createDeceased()">Tell</button>
+</div>
+
