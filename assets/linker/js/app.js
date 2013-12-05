@@ -1,3 +1,28 @@
+(function(angular){
+  'use strict';
+
+  angular.module("MyApp", [
+    'ngTouch',
+    'ngRoute',
+    'ngAnimate',
+    'MyApp.controllers',
+    'MyApp.restServices'
+  ]).
+  config(['$routeProvider',function($routeProvider){
+    $routeProvider.when('/ads',{templateUrl:'ads/list',controller:"AdsCtrl"});
+    $routeProvider.when('/ads/new',{templateUrl:'ads/new',controller:"NewAdCtrl"});
+    $routeProvider.when('/ads/:id',{templateUrl:'ads/one',controller:"AdDetailsCtrl"});
+    $routeProvider.when('/deceased/chooser',{templateUrl:'deceased/chooser',controller:"DeceasedChooserCtrl"});
+    $routeProvider.when('/deceased/:id',{templateUrl:'deceased/profile',controller:"DeceasedProfileCtrl"});
+    $routeProvider.when('/category/:id',{templateUrl:"blog/category",controller:"CategoryCtrl"});
+    $routeProvider.when('/article/:id',{templateUrl:"blog/article",controller:"ArticleCtrl"});
+    $routeProvider.when('/account',{templateUrl:"account/index",controller:"AccountCtrl"});
+    $routeProvider.otherwise({redirectTo: '/ads'});
+  }]);
+
+})(window.angular)
+
+
 /**
  * app.js
  *
@@ -69,28 +94,3 @@
 //   window.io
 
 // );
-
-
-
-(function(angular){
-  'use strict';
-
-  angular.module("MyApp", [
-    'ngTouch',
-    'ngRoute',
-    'ngAnimate',
-    'MyApp.controllers',
-    'MyApp.restServices'
-  ]).
-  config(['$routeProvider',function($routeProvider){
-    $routeProvider.when('/ads',{templateUrl:'ads/list',controller:"AdsCtrl"});
-    $routeProvider.when('/ads/new',{templateUrl:'ads/new',controller:"NewAdCtrl"});
-    $routeProvider.when('/ads/:id',{templateUrl:'ads/one',controller:"AdDetailsCtrl"});
-    $routeProvider.when('/deceased/:id',{templateUrl:'deceased/profile',controller:"DeceasedProfileCtrl"});
-    $routeProvider.when('/category/:id',{templateUrl:"blog/category",controller:"CategoryCtrl"});
-    $routeProvider.when('/article/:id',{templateUrl:"blog/article",controller:"ArticleCtrl"});
-    $routeProvider.when('/account',{templateUrl:"account/index",controller:"AccountCtrl"});
-    $routeProvider.otherwise({redirectTo: '/ads'});
-  }]);
-
-})(window.angular)

@@ -64,7 +64,7 @@ module.exports = function (grunt) {
     // *->    put other dependencies here   <-*
 
     // All of the rest of your app scripts imported here
-    'linker/**/*.js'
+    'linker/js/**/*.js'
   ];
 
 
@@ -133,7 +133,8 @@ module.exports = function (grunt) {
   grunt.loadTasks(depsPath + '/grunt-contrib-concat/tasks');
   grunt.loadTasks(depsPath + '/grunt-sails-linker/tasks');
   grunt.loadNpmTasks('grunt-angular-templates');
-  grunt.loadTasks(depsPath + '/grunt-contrib-watch/tasks');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  //grunt.loadTasks(depsPath + '/grunt-contrib-watch/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-uglify/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-cssmin/tasks');
   grunt.loadTasks(depsPath + '/grunt-contrib-less/tasks');
@@ -266,9 +267,9 @@ module.exports = function (grunt) {
           appRoot: '.tmp/public'
         },
         files: {
-          '.tmp/public/**/*.html': jsFilesToInject,
-          'views/**/*.html': jsFilesToInject,
-          'views/**/*.ejs': jsFilesToInject
+          '.tmp/public/**/*.html': (['.tmp/public/linker/live.js'].concat(jsFilesToInject)),
+          'views/**/*.html': (['.tmp/public/linker/live.js'].concat(jsFilesToInject)),
+          'views/**/*.ejs':(['.tmp/public/linker/live.js'].concat(jsFilesToInject))
         }
       },
 
@@ -413,7 +414,11 @@ module.exports = function (grunt) {
         files: ['assets/**/*'],
 
         // When assets are changed:
-        tasks: ['compileAssets', 'linkAssets']
+        tasks: ['compileAssets', 'linkAssets'],
+
+        options:{
+          livereload:true
+        }
       }
     }
   });
@@ -472,19 +477,19 @@ module.exports = function (grunt) {
     'sails-linker:devTplJADE'
   ]);
 
-  // When API files are changed:
-  // grunt.event.on('watch', function(action, filepath) {
-  //   grunt.log.writeln(filepath + ' has ' + action);
+  //When API files are changed:
+  grunt.event.on('watch', function(action, filepath) {
+    grunt.log.writeln(filepath + ' has ' + action);
 
-  //   // Send a request to a development-only endpoint on the server
-  //   // which will reuptake the file that was changed.
-  //   var baseurl = grunt.option('baseurl');
-  //   var gruntSignalRoute = grunt.option('signalpath');
-  //   var url = baseurl + gruntSignalRoute + '?action=' + action + '&filepath=' + filepath;
+    // Send a request to a development-only endpoint on the server
+    // which will reuptake the file that was changed.
+    var baseurl = grunt.option('baseurl');
+    var gruntSignalRoute = grunt.option('signalpath');
+    var url = baseurl + gruntSignalRoute + '?action=' + action + '&filepath=' + filepath;
 
-  //   require('http').get(url)
-  //   .on('error', function(e) {
-  //     console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
-  //   });
-  // });
+    require('http').get(url)
+    .on('error', function(e) {
+      console.error(filepath + ' has ' + action + ', but could not signal the Sails.js server: ' + e.message);
+    });
+  });
 };

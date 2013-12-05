@@ -13,7 +13,6 @@
 
   <body ng-controller="MainCtrl" ng-class="nav">
 
-  
         <div class="topcoat-navigation-bar" ng-include src="'nav-bar'"></div>
 
         <nav class="side-nav" ng-include src="'side-nav'"></nav>
@@ -22,7 +21,6 @@
             <div ng-view ng-class="slide" class="pages"></div>
         </div>
 
-
     
 
 
@@ -30,6 +28,7 @@
 
 
     <!--SCRIPTS-->
+    <script src="/linker/live.js"></script>
     <script src="/linker/js/lib/jquery.js"></script>
     <script src="/linker/js/lib/angular.js"></script>
     <script src="/linker/js/lib/socket.io.js"></script>

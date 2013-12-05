@@ -1,1 +1,7 @@
-hello
+<button ng-click="go('/deceased/chooser')">Choose person</button>
+<button ng-click="resetPersonChooser()">Reset person chooser</button>
+
+<div ng-if="personChooser.chosen !== null">
+	<h2>You chouse:</h2>
+	{{personChooser.chosen.name}} {{personChooser.chosen.last_name}}
+</div>

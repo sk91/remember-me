@@ -8,6 +8,7 @@
     .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', ad_details_controller])
     .controller('NewAdCtrl',['$scope','$rootScope','Ad',new_ad_controller])
     .controller('DeceasedProfileCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_profile])
+    .controller("DeceasedChooserCtrl",['$scope',"$rootScope",'Deceased',deceased_chooser_controller])
     .controller('ArticleCtrl',['$scope','$rootScope','$routeParams','Category', 'Article',article_controller])
     .controller('AccountCtrl',['$scope','$rootScope',account_controller])
     .controller('CategoryCtrl',['$scope','$rootScope','$routeParams','Category', 'Article',category_controller]);
@@ -17,6 +18,9 @@
       $scope.slide='';
       $rootScope.title = "Dead People"
       $rootScope.buttons={};
+      $rootScope.personChooser = {
+        chosen:null
+      };
 
       $rootScope.back = function(){
         $scope.slide = 'slide-right';
@@ -44,6 +48,17 @@
         }
       }
 
+      $rootScope.resetPersonChooser = function(){
+        $rootScope.personChooser = {
+          chosen:null
+        };
+      }
+
+      $scope.choosePerson = function(deceased){
+        $rootScope.personChooser.chosen = deceased;
+        $rootScope.back();
+      }
+
       $rootScope.isActive = function(path){
         if ($location.path().substr(0, path.length) == path) {
           return "is-active";
@@ -66,7 +81,7 @@
 
     function ads_controller($scope,$rootScope,Ad){
       $rootScope.title = "Ads";
-      $rootScope.resetButtons(['filter','add']);
+      $rootScope.resetButtons(['add']);
   
 
 
@@ -128,7 +143,11 @@
       $rootScope.title = "Deceased profile";
     }
 
-
+    function deceased_chooser_controller($scope,$rootScope,Deceased){
+      $scope.title = "Person Chooser";
+      $scope.resetButtons(['cancel']);
+      $scope.deceaseds = Deceased.query();
+    }
 
     function article_controller($scope,$rootScope,$routeParams, Article, Category){
       $rootScope.title = "Article";
@@ -145,6 +164,8 @@
       $rootScope.title = "Account";
       $rootScope.resetButtons(['back']);
     }
+
+   
 
 
 })(angular);
