@@ -1,26 +1,54 @@
-<button ng-click="go('/deceased/chooser')">Choose person</button>
-<button ng-click="resetPersonChooser()">Reset person chooser</button>
 
-<div ng-if="personChooser.chosen !== null">
-	<h2>You chouse:</h2>
-	{{personChooser.chosen.name}} {{personChooser.chosen.last_name}}
+<div class="details" ng-if="deceased !== false">
+	<div class="topcoat-list__header">
+		<img ng-src="{{deceased.photo}}"/>
+		<h1>{{deceased.name}} {{deceased.last_name}}</h1> 
+		<h2>{{deceased.birth_date | date:'MM.yyyy'}}-{{deceased.death_date | date: 'MM.yyyy'}}</h2>
+	<div class="cleaner"></div>
+	</div>
+	
+	<div class="topcoat-list__container" >
+		<ul class="topcoat-list">
 
-	<button ng-click="go('/deceased/{{personChooser.chosen.id}}/edit')">Edit profile</button>
-	<button ng-click="go('/ads/create/obit/{{personChooser.chosen.id}}')">Write obit</button>
-	<button ng-click="go('/ads/create/sympathy/{{personChooser.chosen.id}}')">Edit profile</button>
+			<li ng-click="go('/ads/new')" class="topcoat-list__item">
+				Add new
+			</li>
 
+			<li ng-click="choosePerson('/ads/new',deceased)" class="topcoat-list__item">
+				Choose sombody else
+			</li>
+			<li class="topcoat-list__item" ng-click="go('/deceased/{{deceased.id}}/edit')">Edit profile</li>
+			<li class="topcoat-list__item" ng-click="go('/ads/create/obit/{{deceased.id}}')">Write obit</li>
+			<li class="topcoat-list__item" ng-click="go('/ads/create/sympathy/{{deceased.id}}')">Edit profile</li>
+		</ul>
+		
+
+	</div>
 </div>
 
+<div class="details" ng-if="!deceased">
+	<div class="topcoat-list__header">
+		<button class='topcoat-button--cta'  ng-click="choosePerson()">Choose</button>
+	</div>
 
-<div ng-if="personChooser.chosen === null">
-	<h1>Please tell us about him</h1>
-	<input type="text" placeholder="Name"/>
-	<input type="text" placeholder="Last name"/>
-	<select name="" id="">
-		<option value="">Gender</option>
-		<option value="m">Male</option>
-		<option value="f">Femaile</option>
-	</select>
-	<button ng-click="createDeceased()">Tell</button>
+		
+	<div class="form">
+		<h1>Add new person</h1>
+			<input class="topcoat-text-input" type="text" placeholder="Name"/>
+		<input class="topcoat-text-input" type="text" placeholder="Last name"/>
+		<label class="topcoat-radio-button"><input type="radio" name="gender" value='m' checked>
+			<div class="topcoat-radio-button__checkmark"></div>
+			<span>Male</span>
+		</label>
+		<label class="topcoat-radio-button"><input type="radio" name="gender" value='f' >
+			<div class="topcoat-radio-button__checkmark"></div>
+			<span>Female</span>
+		</label>
+		<button class='topcoat-button'  ng-click="createDeceased()">Add</button>
+	</div>
+		
+
+		
+		
+
 </div>
-

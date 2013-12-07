@@ -33,10 +33,32 @@ module.exports = {
       type:'json',
       ad:true
     }
-  }
-
+  },
+  beforeCreate:attach_deceased,
+  beforeUpdate:attach_deceased
 };
 
 function is_ad(ad){
   return true;
+}
+
+function attach_deceased(ad,next){
+  if(!("deceased" in ad && "id" in ad.deceased)){
+    return next("No deceased attached");
+  }
+
+  Deceased.findOne({"id":ad.deceased.id},function deceased_found(err,deceased){
+    if(err) return next(err);
+    if(!deceased) return next("Deceased not found");
+    console.log(deceased);
+    ad.deceased = {
+      "id": deceased.id,
+      "name":deceased.name,
+      "last_name":deceased.last_name,
+      "birth_date": deceased.birth_date,
+      "death_date": deceased.death_date,
+      "photo":deceased.photo
+    }
+    next();
+  });
 }

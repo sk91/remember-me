@@ -12,7 +12,8 @@
     "sails-mongo": "~0.9.6",
     "grunt-cli": "~0.1.11",
     "grunt-angular-templates": "~0.4.7",
-    "grunt-contrib-watch": "~0.5.3"
+    "grunt-contrib-watch": "~0.5.3",
+    "lodash": "~2.4.1"
   },
   "scripts": {
     "start": "./node_modules/.bin/sails lift --production",

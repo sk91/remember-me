@@ -2,7 +2,7 @@ html,body{
     position:absolute;
     width:100%;
     height:100%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 .topcoat-navigation-bar .topcoat-icon-button--quiet {
     vertical-align: middle;
@@ -12,38 +12,73 @@ html,body{
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     position: absolute;
-    top:71px;
+    top:3.1rem;
     bottom: 0px;
     left: 0px;
     right: 0px;
-    padding-bottom:7.4rem;
+}
+.has-tab-bar{
+    padding-bottom:3rem;
 }
 
 
 .search-bar {
-    padding:10px 10px 12px 8px;
+    padding:10px 10px 5px 5px;
 }
 
 .search-bar > input {
     width: 100%;
+}
+.topcoat-search-input{
+    line-height: 2rem;
+    height:2rem;
 }
 
 a {
     text-decoration: none;
     color: inherit;
     -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: rgb(0, 0, 0);
+    -webkit-tap-highlight-color: rgb(0, 0, 0,0);
 }
 
 .details {
     margin: auto;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width:100%;
+    height:100%;
 }
 
-.details>img {
-    float:left;
-    margin:10px;
-    width: 80px;
-    height: 80px;
+.details .block{
+    width: 90%;
+    display: block;
+    margin:5px auto;
+    background: #e5e9e8;
+    padding:1%;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 5px;
+}
+
+
+.details .block.sympathy img{
+    width:49%;
+    height:98%;
+    margin:0px;
+    padding:0px;
+}
+
+.details .block.sympathy,.details .block.obit,.details .block.deceased {
+    width:90%;
+    height:60%;
+    text-align: center;
+}
+.details .block>img{
+    width: 98%;
+    height:98%;
+}
+
+.details .block.sympathy img{
+    width:49%;
 }
 
 .details h1 {
@@ -60,6 +95,32 @@ a {
     color: #888;
 }
 
+.details .topcoat-list__header{
+    text-align: center;
+}
+.details .topcoat-list__header>img{
+    float:left;
+    width:80px;
+    height:80px;
+    margin:10px;
+}
+.details .topcoat-list__header>.topcoat-button--cta{
+    width:100%;
+}
+
+.details .form{
+    padding: 4px 20px;
+}
+.details .form h1{
+ text-align: center;
+}
+.details .form input[type="text"],.details .form button{
+    width:100%;
+    margin:5px 0px;
+}
+.details .form label span{
+    margin:0px 5px;
+}
 .list {
     list-style-type: none;
     height: 100%;
@@ -241,8 +302,7 @@ body.left-nav .main-content {
     -webkit-box-shadow: -5px 5px 8px -5px rgba(0, 0, 0, 0.57);
     box-shadow: -5px 5px 8px -5px rgba(0, 0, 0, 0.57);
     padding:0px;
-}
-.topcoat-navigation-bar {
+    height:3rem;
     position:absolute;
     width:100%;
     z-index:99;
@@ -251,16 +311,31 @@ body.left-nav .main-content {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
 }
+
+.topcoat-navigation-bar__item{
+    line-height: 3rem;
+}
+
+.topcoat-icon-button--quiet{
+    padding: 0 0.5rem;
+    line-height: 2.5rem;
+}
+
+.topcoat-icon{
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    width: 1.5rem;
+}
 .side-nav {
     display:block;
     position:absolute;
     top:0;
     left:0;
     width:320px;
-    height:100%;
+    bottom:0px;
 }
 .side-nav__list__container {
-    margin-top:4.375rem;
+    margin-top:3rem;
     border-top:none;
     border-bottom:none;
 }
@@ -293,10 +368,10 @@ body.left-nav .main-content {
     background: inherit;
     z-index: 100;
     left: 0;
-    top:4.4rem;
+    top:3rem;
+    bottom:0px;
     width:100%;
-    height:100%;
-    overflow: hidden;
+    overflow: auto;
     transition: left 0.2s ease-out;
     -webkit-transition: left 0.2s ease-out;
     transform: translate3d(0, 0, 0);
@@ -316,6 +391,9 @@ body.left-nav .main-content {
     }
 }*/
 
+.cleaner{
+    clear:both;
+}
 
 
 .topcoat-icon{
@@ -355,7 +433,7 @@ body.left-nav  .topcoat-icon-button--quiet.menu{
 
 .tabs{
     position:absolute;
-    height:7.4rem;
+    height:3.1rem;
     width:100%;
     bottom:0px;
     background: #e5e9e8;
@@ -364,4 +442,3 @@ body.left-nav  .topcoat-icon-button--quiet.menu{
 .tabs .topcoat-tab-bar{
     margin:0px auto;
 }
-d

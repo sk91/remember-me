@@ -4,18 +4,22 @@
         </a>
     </div>
       <div class="topcoat-navigation-bar__item nav-buttons-right">
+      <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.home" ng-click="go('/')">
+            <span class="topcoat-icon icomatic">home</span>
+        </a> 
         <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.back" ng-click="back()">
             <span class="topcoat-icon icomatic">back</span>
         </a> 
-        <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.add" ng-click="go('/ads/new')">
+        <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.add" ng-click="add()">
             <span class="topcoat-icon icomatic">plus</span>
         </a>
         <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.filter" ng-click="toogleFilter()">
             <span class="topcoat-icon icomatic">tileview</span>
         </a>
-          <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.cancel" ng-click="back()">
+        <a class="topcoat-icon-button--quiet" href="" ng-show="buttons.cancel" ng-click="back()">
             <span class="topcoat-icon icomatic">cancel</span>
-        </a>    
+        </a>
+           
     </div>
     <div class="topcoat-navigation-bar__item pull-center">
         <h1 class="topcoat-navigation-bar__title">{{title}}</h1>

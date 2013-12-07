@@ -1,12 +1,12 @@
 <div class="search-bar">
     <input ng-model="query" type="search" placeholder="search" class="topcoat-search-input search-key">
 </div>
-<div class="topcoat-list__container scroller">
+<div class="topcoat-list__container scroller has-tab-bar">
      <div ng-show="toggle_filter">
       <h1>Additional filters should popup from the left (similar to menu)</h1>  
     </div>
     <ul class="topcoat-list list ads-list">
-        <li ng-repeat="ad in ads | filter:filterAds | filter:query | orderBy:'deceased.death_date'| orderBy:'deceased.name' |orderBy:'details.type'"  class="topcoat-list__item ">
+        <li ng-repeat="ad in ads | filter:filterAds | filter:query | orderBy:'deceased.name'"  class="topcoat-list__item ">
             <a ng-click="go('/deceased/'+ad.deceased.id)" ng-if="ad.details.type=='deceased'" class="deceased">
                 <img ng-src="{{ad.deceased.photo}}" >
                 <p>{{ad.deceased.last_name}} {{ad.deceased.name}}</p>

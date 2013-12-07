@@ -1,2 +1,18 @@
-<div class="details"><h1>{{deceased.name}} {{deceased.last_name}}</h1></div>
+<div class="details">
+	<div class="block deceased">
+		<img src="{{deceased.photo}}" alt="">
+	</div>
+	<div class="block">
+		<h1>
+			{{deceased.title}} {{deceased.name}} {{deceased.middle_name}} {{deceased.last_name}} 
+		</h1>
+		<h2>{{deceased.birth_date | date:'MM.yyyy'}}-{{deceased.death_date | date: 'MM.yyyy'}}</h2>
+	</div>
+
+	<div class="block">
+		<h1>About:</h1>
+		{{deceased.about}}
+	</div>
+	
+</div>
  

@@ -5,8 +5,8 @@
   angular.module("MyApp.controllers",[])
     .controller('MainCtrl',['$scope','$rootScope','$window','$location',main_controller])
     .controller('AdsCtrl',['$scope','$rootScope','Ad',ads_controller])
-    .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', ad_details_controller])
-    .controller('NewAdCtrl',['$scope','$rootScope','Ad',new_ad_controller])
+    .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', "Deceased", ad_details_controller])
+    .controller('NewAdCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',new_ad_controller])
     .controller('CreateObitCtrl',['$scope','$rootScope','Ad',create_obit_controller])
     .controller('CreateSympathyCtrl',['$scope','$rootScope','Ad',create_sympathy_controller])
     .controller('DeceasedProfileCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_profile_controller])
@@ -22,7 +22,7 @@
       $rootScope.title = "Dead People"
       $rootScope.buttons={};
       $rootScope.personChooser = {
-        chosen:null
+        next:null
       };
 
       $rootScope.back = function(){
@@ -51,15 +51,15 @@
         }
       }
 
-      $rootScope.resetPersonChooser = function(){
-        $rootScope.personChooser = {
-          chosen:null
-        };
-      }
+      $scope.choosePerson = function(next,deceased){
+        var url = '/deceased/chooser';
+        url += (deceased)? '/'+ deceased.id:'';
 
-      $scope.choosePerson = function(deceased){
-        $rootScope.personChooser.chosen = deceased;
-        $rootScope.back();
+        if(!next){
+          next = $location.path();
+        }
+        $rootScope.personChooser.next = next;
+        $rootScope.go(url);
       }
 
       $rootScope.isActive = function(path){
@@ -71,7 +71,7 @@
       }
 
       $rootScope.add = function(){
-        alert("add");
+        
       }
       $rootScope.toogleFilter = function(){
         alert('filter');
@@ -85,8 +85,9 @@
     function ads_controller($scope,$rootScope,Ad){
       $rootScope.title = "Ads";
       $rootScope.resetButtons(['add']);
-  
-
+      $rootScope.add = function(){
+        $rootScope.go('/ads/new');
+      }
 
       $scope.choose_ad_filter = function(filter){
         $rootScope.ad_filter_selected = filter;
@@ -103,23 +104,18 @@
         $scope.toggle_filter=!$scope.toggle_filter;
       }
 
-      $scope.ads = [];
+      $scope.ads = Ad.query();
       $scope.toggle_filter = false;
-
-      Ad.query(function(ads){
-        _(ads).each(function(ad){
-          ad.getDeceased(function(deceased){
-            ad.deceased = deceased;
-            $scope.ads.push(ad);
-          });
-        });
-      });
       
     }
 
-    function new_ad_controller($scope,$rootScope,Ad){
+    function new_ad_controller($scope,$rootScope,$routeParams,Ad,Deceased){
       $rootScope.resetButtons(['cancel']);
       $rootScope.title ="Write ad"
+      $scope.deceased = false
+      if($routeParams.deceased){
+        $scope.deceased =  Deceased.get({'id':$routeParams.deceased});
+      }
 
       $scope.createDeceased = function(){
         alert('Create new deceased');
@@ -137,17 +133,20 @@
       $rootScope.title ="Create sympathy ad";
     }
 
-    function ad_details_controller($scope,$rootScope,$routeParams,Ad){
+    function ad_details_controller($scope,$rootScope,$routeParams,Ad,Deceased){
       $rootScope.resetButtons(['back']);
+      $scope.deceased=null;
+
       $scope.ad = Ad.get({id:$routeParams.id},function(ad){
-        ad.getDeceased(function(deceased){
-            $scope.ad.deceased=deceased;
-        });
         if(ad.details.type == 'obit'){
           $rootScope.title = "Obit";
         }else{
           $rootScope.title = "Sympathy";
         }
+        $scope.deceased= ad.deceased;
+        Deceased.get({id:ad.deceased.id},function(deceased){
+          $scope.deceased = deceased;
+        });
       });
       
 
@@ -155,14 +154,17 @@
     }
 
     function deceased_profile_controller($scope,$rootScope,$routeParams,Deceased){
-      $rootScope.resetButtons(['back']);
+      $rootScope.resetButtons(['back','add']);
+      $rootScope.add = function(){
+        $rootScope.go("/ads/new/" + $scope.deceased.id);
+      }
       $scope.deceased = Deceased.get({id:$routeParams.id});
-      $rootScope.title = "Deceased edit";
+      $rootScope.title = "Deceased profile";
     }
      function deceased_edit_controller($scope,$rootScope,$routeParams,Deceased){
       $rootScope.resetButtons(['back']);
       $scope.deceased = Deceased.get({id:$routeParams.id});
-      $rootScope.title = "Deceased profile";
+      $rootScope.title = "Deceased edit";
     }
 
     function deceased_chooser_controller($scope,$rootScope,Deceased){

@@ -17,7 +17,6 @@
 
   var deceased_factory = function($resource,User){
     var Deceased = $resource("/deceaseds/:id",{id:"@id"});
-
     Deceased.prototype.getResponsible = function(cb){
       return User.get({id:this.responsible.id},cb);
     };
