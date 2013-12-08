@@ -12,13 +12,13 @@ html,body{
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     position: absolute;
-    top:3.1rem;
+    top:0px;
     bottom: 0px;
     left: 0px;
     right: 0px;
 }
 .has-tab-bar{
-    padding-bottom:3rem;
+    bottom:3rem;
 }
 
 
@@ -123,8 +123,10 @@ a {
 }
 .list {
     list-style-type: none;
-    height: 100%;
+    height: auto;
     border-bottom: none;
+    overflow:visible;
+    -webkit-overflow-scrolling: none;
 }
 
 .list > li {
@@ -432,7 +434,7 @@ body.left-nav  .topcoat-icon-button--quiet.menu{
 }
 
 .tabs{
-    position:absolute;
+    position:fixed;
     height:3.1rem;
     width:100%;
     bottom:0px;
