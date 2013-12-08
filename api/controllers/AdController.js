@@ -40,53 +40,70 @@ module.exports = {
       , birth_date_before= req.param('birth_date_before')
       , birth_date_after = req.param('birth_date_after')
       , birth_date = req.param('birth_date')
-      , query = {};
+      , query = Ad.find();
 
     if(full_name){
-      //search full name agains name and last name (limit fullname to 3 words)
-      full_name=full_name.trim().replace(/ +(?= )/g,'').split(" ").slice(0,3);
-      full_name=new RegExp("^(" + full_name.join("|") +")(.*)",'i');
-      name = name || full_name;
-      last_name = last_name || full_name;
+      var where_query = [];
+      //search full name agains name and last name
+      full_name=full_name.trim().replace(/ +(?= )/g,'').split(" ");
+      for(var i = 0; i<full_name.length;i++){
+        if(!name && !last_name && full_name.length>1){
+          for(var j in full_name){
+            where_query.push({
+              'deceased.name':{'startsWith':full_name[i]},
+              'deceased.last_name':{'startsWith':full_name[j]}
+            });
+          }
+        }else{
+          if(!name){
+            where_query.push({'deceased.name':{'startsWith':full_name[i]}});
+          }if(!last_name){
+            where_query.push({'deceased.last_name':{'startsWith':full_name[i]}});
+          }
+        }
+        if(where_query.length>0){
+          query.where({"or":where_query});
+        }
+      }
+     
+    }
+
+    if(name){
+      query.where({'deceased.name':name});
+    }
+    if(last_name){
+      query.where({'deceased.last_name':last_name})
     }
     if(!birth_date){
       if(birth_date_after){
-        birth_date={birth_date:{$gt:birth_date_after}};
+        birth_date={"deceased.birth_date":{'>=':birth_date_after}};
       }
       if(birth_date_before){
-        birth_date = birth_date || {birth_date:{}};
-        birth_date.birth_date['$lt'] = birth_date_before;
+        birth_date = birth_date || {"deceased.birth_date":{}};
+        birth_date["deceased.birth_date"]['<='] = birth_date_before;
       }
     }else{
-      birth_date = {birth_date:birth_date}
+      birth_date = {"deceased.birth_date":birth_date}
     }
 
     if(!death_date){
       if(death_date_after){
-        death_date={death_date:{$gt:death_date_after}};
+        death_date={"deceased.death_date":{">=":death_date_after}};
       }
       if(death_date_before){
-        death_date= death_date || {death_date:{}};
-        death_date.death_date['$lt'] = death_date_before;
+        death_date= death_date || {"deceased.death_date":{}};
+        death_date["deceased.death_date"]['<='] = death_date_before;
       }
     }else{
-      death_date = {death_date:death_date}
+      death_date = {"deceased.death_date":death_date}
     }
-
 
     if(name){
-        name = {name:name};
-    }
-    if(last_name){
-      last_name = {last_name:last_name};
+
     }
 
-    query=_.assign(query,name,last_name,birth_date,death_date);
-    if(!_.isEmpty(query)){
-      console.log("passes");
-    }
 
-    Ad.find(query,function found_ads(err,data){
+    query.exec(function found_ads(err,data){
       res.send(data);
     })
   },  

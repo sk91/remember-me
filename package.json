@@ -9,11 +9,11 @@
     "ejs": "0.8.4",
     "optimist": "0.3.4",
     "sails": "~0.9.7",
-    "sails-mongo": "~0.9.6",
     "grunt-cli": "~0.1.11",
     "grunt-angular-templates": "~0.4.7",
     "grunt-contrib-watch": "~0.5.3",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "sails-mongo": "~0.9.6"
   },
   "scripts": {
     "start": "./node_modules/.bin/sails lift --production",
