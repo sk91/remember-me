@@ -169,7 +169,11 @@
 
     function deceased_chooser_controller($scope,$rootScope,Deceased){
       $scope.title = "Person Chooser";
-      $scope.resetButtons(['cancel']);
+      $scope.resetButtons(['cancel','add']);
+
+      $rootScope.add = function(){
+        $rootScope.go('/ads/new');
+      }
       $scope.deceaseds = Deceased.query();
     }
 
