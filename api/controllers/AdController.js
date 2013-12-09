@@ -83,7 +83,7 @@ module.exports = {
     add_date_cretaria(query,death_date,"deceased.death_date");
 
     query.exec(function found_ads(err,data){
-      if(err) return next(err);
+      if(err) return next({err:err});
       res.send(data);
     })
   },  

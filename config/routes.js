@@ -35,8 +35,12 @@ module.exports.routes = {
   '/': {
     view: 'home/index'
   },
+
+
   'post /login':'SessionController.login',
   'get /logout':'SessionController.logout',
+
+  'post /deceaseds/:id/photo': 'DeceasedController.uploadPhoto',
 
   /*
   // But what if you want your home page to display
