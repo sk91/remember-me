@@ -29,12 +29,12 @@ module.exports = {
   _config: {},
 
 
-  index:function(req,res){
+  index:function(req,res,next){
 
     var full_name = req.param('full_name')
       , name = req.param('name')
       , last_name = req.param('last_name')
-      , death_date_before=req.param('death_date_before')
+      , death_date_before= req.param('death_date_before')
       , death_date_after = req.param('death_date_after')
       , death_date = req.param('death_date')
       , birth_date_before= req.param('birth_date_before')
@@ -74,38 +74,35 @@ module.exports = {
     if(last_name){
       query.where({'deceased.last_name':last_name})
     }
-    if(!birth_date){
-      if(birth_date_after){
-        birth_date={"deceased.birth_date":{'>=':birth_date_after}};
-      }
-      if(birth_date_before){
-        birth_date = birth_date || {"deceased.birth_date":{}};
-        birth_date["deceased.birth_date"]['<='] = birth_date_before;
-      }
-    }else{
-      birth_date = {"deceased.birth_date":birth_date}
-    }
 
-    if(!death_date){
-      if(death_date_after){
-        death_date={"deceased.death_date":{">=":death_date_after}};
-      }
-      if(death_date_before){
-        death_date= death_date || {"deceased.death_date":{}};
-        death_date["deceased.death_date"]['<='] = death_date_before;
-      }
-    }else{
-      death_date = {"deceased.death_date":death_date}
-    }
+    add_date_cretaria(query,birth_date_after,"deceased.birth_date",'>=');
+    add_date_cretaria(query,birth_date_before,"deceased.birth_date",'<=');
+    add_date_cretaria(query,birth_date,"deceased.birth_date");
+    add_date_cretaria(query,death_date_after,"deceased.death_date",'>=');
+    add_date_cretaria(query,death_date_before,"deceased.death_date",'<=');
+    add_date_cretaria(query,death_date,"deceased.death_date");
 
-    if(name){
-
-    }
-
-
+    console.log(query);
     query.exec(function found_ads(err,data){
+      if(err) return next(err);
       res.send(data);
     })
   },  
 };
 
+function add_date_cretaria(query,date,field,range){
+  if(!date) return;
+
+  var dateObj = new Date(date)
+    , whereObj = {};
+
+  if(_.isDate(dateObj) && !isNaN(dateObj.getTime())){
+    if(range){
+      whereObj[field]={};
+      whereObj[field][range]=dateObj.toISOString();
+    }else{
+      whereObj[filed] = dateObj.toISOString();
+    }
+    query.where(whereObj);
+  }
+}
