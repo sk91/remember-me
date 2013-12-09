@@ -91,24 +91,30 @@
       }
 
 
-       $rootScope.ad_filter_selected = 'all';
+       
     }
 
 
     function ads_controller($scope,$rootScope,Ad){
       $rootScope.title = "Ads";
       $rootScope.resetButtons(['add']);
+
+      $scope.ad_filter_selected = 'all';
+
       $rootScope.add = function(){
         $rootScope.go('/ads/new');
       }
 
       $scope.choose_ad_filter = function(filter){
-        $rootScope.ad_filter_selected = filter;
+        $scope.ad_filter_selected = filter;
       }
 
       $scope.filterAds = function(ad){
         if($scope.ad_filter_selected === 'all'){
           return true;
+        }
+        if(!ad.details || !ad.details.type){
+          return false;
         }
         return $scope.ad_filter_selected === ad.details.type;
       }
@@ -123,7 +129,7 @@
     }
 
     function new_ad_controller($scope,$rootScope,$routeParams,Ad,Deceased){
-      $rootScope.resetButtons(['cancel']);
+      $rootScope.resetButtons(['back']);
       $rootScope.title ="Write ad";
       $scope.deceased = false;
       if($routeParams.deceased){
@@ -190,7 +196,7 @@
 
     function deceased_chooser_controller($scope,$rootScope,Deceased){
       $scope.title = "Person Chooser";
-      $scope.resetButtons(['cancel','add']);
+      $scope.resetButtons(['back','add']);
 
       $rootScope.add = function(){
         $rootScope.go('/ads/new');

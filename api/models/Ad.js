@@ -29,9 +29,10 @@ module.exports = {
       model:'deceased'
   	},
 
-    deatails:{
+    details:{
       type:'json',
-      ad:true
+      ad:true,
+      required:true
     }
   },
   beforeCreate:attach_deceased,

@@ -79,10 +79,10 @@ module.exports = {
         id:deceased.id
       },
       details:{
-        type:"deceased"
+        "type":"deceased"
       }
     },function(err,ad){
-      console.log(err,ad);
+      if(err) return next(err.ValidationError);
       next();
     });
     

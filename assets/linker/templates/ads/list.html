@@ -7,7 +7,7 @@
       <h1>Additional filters should popup from the left (similar to menu)</h1>  
     </div>
     <ul class="topcoat-list list ads-list">
-        <li ng-repeat="ad in ads | filter:filterAds | filter:query | orderBy:'deceased.name'"  class="topcoat-list__item ">
+        <li ng-repeat="ad in ads | filter:filterAds | filter:query | orderBy:'createdAt':true"  class="topcoat-list__item ">
             <a ng-click="go('/deceased/'+ad.deceased.id)" ng-if="ad.details.type=='deceased'" class="deceased">
                 <img ng-src="{{staticUrl(ad.deceased.photo)}}" >
                 <p>{{ad.deceased.last_name}} {{ad.deceased.name}}</p>
