@@ -1,19 +1,7 @@
 <div class="topcoat-list__container side-nav__list__container">
     <ul class="topcoat-list side-nav__list">
-        <li ng-class="isActive('/ads')" class="topcoat-list__item side-nav__list__item " >
-            <a ng-click="go('/ads')"  class="side-nav__button">Main</a>
+        <li ng-repeat="item in main_config.menu" ng-class="isActive(item.path)" class="topcoat-list__item side-nav__list__item " >
+            <a ng-click="go(item.path)"  class="side-nav__button">{{item.label}}</a>
         </li>
-        <li ng-class="isActive('/category/information')" class="topcoat-list__item side-nav__list__item">
-            <a ng-click="go('/category/information')" class="side-nav__button">Information</a>
-        </li>
-        <li ng-class="isActive('/category/services')" class="topcoat-list__item side-nav__list__item">
-            <a ng-click="go('category/services')" class="side-nav__button">Services</a>
-        </li>
-        <!-- <li ng-class="isActive('/acount')" class="topcoat-list__item side-nav__list__item">
-            <a ng-click="go('/account')" class="side-nav__button">Account</a>
-        </li>
-        <li class="topcoat-list__item side-nav__list__item">
-            <a ng-click="logout()" class="side-nav__button">Log-out</a>
-        </li> -->
     </ul>
 </div>

@@ -75,7 +75,7 @@ module.exports = {
         "Content-Type": photo.headers['content-type']
       };
 
-      filename = uuid  + extension;
+      filename = sails.config.aws.deceased_image_path.replace(':name',uuid  + extension) ;
 
       var uploader = s3_client.upload(photo.path, filename,headers);
 

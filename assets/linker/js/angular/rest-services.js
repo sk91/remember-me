@@ -39,13 +39,19 @@
     return Article;
   };
 
+  var config_factory = function($resource){
+    var Config = $resource("/configs/:name",{name:"@name"});
+    return Config;
+  }
+
 
   angular.module('MyApp.restServices',['ngResource'])
     .factory("Ad",['$resource',"Deceased",ad_factory])
     .factory("Deceased",['$resource', 'User',deceased_factory])
     .factory("User",['$resource', user_factory])
     .factory("Category",['$resource',category_factory])
-    .factory("Article",['$resource', article_factory]);
+    .factory("Article",['$resource', article_factory])
+    .factory("Config",['$resource', config_factory]);
 
     
 })(angular);  

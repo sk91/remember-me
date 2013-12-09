@@ -9,19 +9,19 @@
     <ul class="topcoat-list list ads-list">
         <li ng-repeat="ad in ads | filter:filterAds | filter:query | orderBy:'deceased.name'"  class="topcoat-list__item ">
             <a ng-click="go('/deceased/'+ad.deceased.id)" ng-if="ad.details.type=='deceased'" class="deceased">
-                <img ng-src="{{ad.deceased.photo}}" >
+                <img ng-src="{{staticUrl(ad.deceased.photo)}}" >
                 <p>{{ad.deceased.last_name}} {{ad.deceased.name}}</p>
                 <p>{{ad.deceased.birth_date | date:'yyyy'}}-{{ad.deceased.death_date | date: 'yyyy'}}</p>
                 <span class="chevron icomatic">next</span>
             </a>
              <a ng-click="go('/ads/'+ad.id)" ng-if="ad.details.type=='obit'" class="obit">
-                <img ng-src="{{ad.deceased.photo}}" >
+                <img ng-src="{{staticUrl(ad.deceased.photo)}}" >
                 <p>{{ad.deceased.last_name}} {{ad.deceased.name}}</p>
                 <p>Obit ad</p>
                 <span class="chevron icomatic">next</span>
             </a>
              <a ng-click="go('/ads/'+ad.id)" ng-if="ad.details.type=='sympathy'" class="sympathy">
-                <img ng-src="{{ad.deceased.photo}}" >
+                <img ng-src="{{staticUrl(ad.deceased.photo)}}" >
                 <img ng-src="{{ad.details.from.photo}}">
                 <p>{{ad.deceased.name}} {{ad.deceased.last_name}}</p>
                 <p>Sympathy from: {{ad.details.from.last_name}} {{ad.details.from.name}}</p>

@@ -50,7 +50,6 @@ function attach_deceased(ad,next){
   Deceased.findOne({"id":ad.deceased.id},function deceased_found(err,deceased){
     if(err) return next(err);
     if(!deceased) return next("Deceased not found");
-    console.log(deceased);
     ad.deceased = {
       "id": deceased.id,
       "name":deceased.name,

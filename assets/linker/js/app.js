@@ -5,6 +5,7 @@
     'ngTouch',
     'ngRoute',
     'ngAnimate',
+    'imageupload',
     'MyApp.controllers',
     'MyApp.restServices'
   ]).

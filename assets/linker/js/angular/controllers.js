@@ -3,7 +3,7 @@
 
 
   angular.module("MyApp.controllers",[])
-    .controller('MainCtrl',['$scope','$rootScope','$window','$location',main_controller])
+    .controller('MainCtrl',['$scope','$rootScope','$window','$location','Config',main_controller])
     .controller('AdsCtrl',['$scope','$rootScope','Ad',ads_controller])
     .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', "Deceased", ad_details_controller])
     .controller('NewAdCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',new_ad_controller])
@@ -17,13 +17,20 @@
     .controller('CategoryCtrl',['$scope','$rootScope','$routeParams','Category', 'Article',category_controller]);
 
 
-    function main_controller($scope,$rootScope,$window,$location){
+    function main_controller($scope,$rootScope,$window,$location,Config){
       $scope.slide='';
       $rootScope.title = "Dead People"
       $rootScope.buttons={};
+
+      $rootScope.staticUrl = function(object){
+        return $rootScope.main_config.static_url + object;
+      }
+
       $rootScope.personChooser = {
         next:null
       };
+
+      $rootScope.main_config = Config.get({name:'name'});
 
       $rootScope.back = function(){
         $scope.slide = 'slide-right';
