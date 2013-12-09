@@ -18,8 +18,8 @@
     $routeProvider.when('/ads/:id',{templateUrl:'ads/one',controller:"AdDetailsCtrl"});
     $routeProvider.when('/deceased/chooser/',{templateUrl:'deceased/chooser',controller:"DeceasedChooserCtrl"});
     $routeProvider.when('/deceased/chooser/:id',{templateUrl:'deceased/chooser',controller:"DeceasedChooserCtrl"});
-    $routeProvider.when('/deceased/:id',{templateUrl:'deceased/profile',controller:"DeceasedProfileCtrl"});
     $routeProvider.when('/deceased/:id/edit',{templateUrl:'deceased/edit',controller:"DeceasedEditCtrl"});
+    $routeProvider.when('/deceased/:id',{templateUrl:'deceased/profile',controller:"DeceasedProfileCtrl"});
     $routeProvider.when('/category/:id',{templateUrl:"blog/category",controller:"CategoryCtrl"});
     $routeProvider.when('/article/:id',{templateUrl:"blog/article",controller:"ArticleCtrl"});
     $routeProvider.when('/account',{templateUrl:"account/index",controller:"AccountCtrl"});

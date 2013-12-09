@@ -1,9 +1,9 @@
 
 <div class="details" ng-if="deceased !== false">
 	<div class="topcoat-list__header">
-		<img ng-src="{{deceased.photo}}"/>
+		<img ng-src="{{staticUrl(deceased.photo)}}"/>
 		<h1>{{deceased.name}} {{deceased.last_name}}</h1> 
-		<h2>{{deceased.birth_date | date:'MM.yyyy'}}-{{deceased.death_date | date: 'MM.yyyy'}}</h2>
+		<h2>{{deceased.birth_date | date:'MM.yyyy'}} - {{deceased.death_date | date: 'MM.yyyy'}}</h2>
 	<div class="cleaner"></div>
 	</div>
 	
@@ -12,9 +12,9 @@
 			<li ng-click="choosePerson('/ads/new',deceased)" class="topcoat-list__item">
 				Choose sombody else
 			</li>
-			<li class="topcoat-list__item" ng-click="go('/deceased/{{deceased.id}}/edit')">Edit profile</li>
-			<li class="topcoat-list__item" ng-click="go('/ads/create/obit/{{deceased.id}}')">Write obit</li>
-			<li class="topcoat-list__item" ng-click="go('/ads/create/sympathy/{{deceased.id}}')">Edit profile</li>
+			<li class="topcoat-list__item" ng-click="go('/deceased/'+ deceased.id +'/edit')">Edit profile</li>
+			<li class="topcoat-list__item" ng-click="go('/ads/create/obit/'+ deceased.id )">Write obit</li>
+			<li class="topcoat-list__item" ng-click="go('/ads/create/sympathy/'+ deceased.id )">Write sympathy</li>
 		</ul>
 		
 
@@ -27,20 +27,35 @@
 	</div>
 
 		
-	<div class="form">
+	<form name="form" class="form" novalidate >
 		<h1>Add new person</h1>
-			<input class="topcoat-text-input" type="text" placeholder="Name"/>
-		<input class="topcoat-text-input" type="text" placeholder="Last name"/>
-		<label class="topcoat-radio-button"><input type="radio" name="gender" value='m' checked>
-			<div class="topcoat-radio-button__checkmark"></div>
-			<span>Male</span>
-		</label>
-		<label class="topcoat-radio-button"><input type="radio" name="gender" value='f' >
-			<div class="topcoat-radio-button__checkmark"></div>
-			<span>Female</span>
-		</label>
-		<button class='topcoat-button'  ng-click="createDeceased()">Add</button>
-	</div>
+		<input ng-model="new_deceased.name" name="name" class="topcoat-text-input" type="text" placeholder="Name" required="required" ng-minlength="2"  required/>
+		<input ng-model="new_deceased.last_name" class="topcoat-text-input" type="text" placeholder="Last name" required="required" ng-minlength="2"/>
+		
+		<div class="row">
+			<label>
+				<span>Birth date</span>
+				<input ng-model="new_deceased.birth_date" class="topcoat-text-input" type="date" placeholder="Birth Date" required="required"/>
+			</label>
+			<label>
+				<span>Death date</span>
+				<input ng-model="new_deceased.death_date" class="topcoat-text-input" type="date" placeholder="Death date" required="required"/>
+			</label>
+		</div>
+		<div class="row">
+			<label class="topcoat-radio-button">
+				<input ng-model="new_deceased.gender" type="radio" name="gender" value='m' required="required">
+				<div class="topcoat-radio-button__checkmark"></div>
+				<span>Male</span>
+			</label>
+			<label class="topcoat-radio-button">
+				<input ng-model="new_deceased.gender" type="radio" name="gender" value='f' required="required">
+				<div class="topcoat-radio-button__checkmark"></div>
+				<span>Female</span>
+			</label>
+		<div class="row">
+		<button ng-click="createDeceased(new_deceased)" ng-disabled="form.$invalid" class='topcoat-button'>Add</button>
+	</form>
 		
 
 		

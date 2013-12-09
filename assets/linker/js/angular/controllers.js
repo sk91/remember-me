@@ -26,6 +26,9 @@
         if(!object || object === ""){
           object = $rootScope.main_config.default_deceased_image;
         }
+        if(/^(http:|https:|)\/\//.test(object)){
+          return object;
+        }
         return $rootScope.main_config.static_url + object;
       }
 
@@ -121,14 +124,22 @@
 
     function new_ad_controller($scope,$rootScope,$routeParams,Ad,Deceased){
       $rootScope.resetButtons(['cancel']);
-      $rootScope.title ="Write ad"
-      $scope.deceased = false
+      $rootScope.title ="Write ad";
+      $scope.deceased = false;
       if($routeParams.deceased){
         $scope.deceased =  Deceased.get({'id':$routeParams.deceased});
       }
 
-      $scope.createDeceased = function(){
-        alert('Create new deceased');
+      $scope.createDeceased = function(new_deceased){
+        var deceased = angular.copy(new_deceased);
+        deceased.birth_date = new Date(deceased.birth_date).toISOString();
+        deceased.death_date = new Date(deceased.death_date).toISOString();
+        deceased = new Deceased(deceased);
+        deceased.$save(function(u,headers){
+          if(!("status" in u)){
+            $rootScope.go("/ads/new/" + u.id);
+          }
+        });
       }
     }
     

@@ -72,6 +72,20 @@ module.exports = {
       type:'string',
       model:"user"
     }
+  },
+  afterCreate:function(deceased,next){
+    Ad.create({
+      deceased:{
+        id:deceased.id
+      },
+      details:{
+        type:"deceased"
+      }
+    },function(err,ad){
+      console.log(err,ad);
+      next();
+    });
+    
   }
 
 };

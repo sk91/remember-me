@@ -9,7 +9,7 @@
     <ul class="topcoat-list list ads-list">
         <li ng-repeat="deceased in deceaseds | filter:query | orderBy:'deceased.name' |orderBy:'details.type'"  class="topcoat-list__item ">
             <a ng-click="go(personChooser.next + '/' + deceased.id)">
-                <img ng-src="{{staticUrl(ad.deceased.photo)}}" >
+                <img ng-src="{{staticUrl(deceased.photo)}}" >
                 <p>{{deceased.last_name}} {{deceased.name}}</p>
                 <p>{{deceased.birth_date | date:'yyyy'}}-{{deceased.death_date | date: 'yyyy'}}</p>
             </a>

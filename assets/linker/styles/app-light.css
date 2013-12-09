@@ -116,10 +116,24 @@ a {
 }
 .details .form input[type="text"],.details .form button{
     width:100%;
+    min-height: 1rem;
     margin:5px 0px;
+}
+.details .form label{
+    display: inline-block;
+    line-height: 3.5rem;
+    height:3.5rem;
+    vertical-align: middle;
+}
+.details .form label .radio-button, .details .form label .topcoat-radio-button__checkmark{
+    vertical-align: middle;
 }
 .details .form label span{
     margin:0px 5px;
+}
+.row{
+    width:100%;
+    display: block;
 }
 .list {
     list-style-type: none;
@@ -444,3 +458,15 @@ body.left-nav  .topcoat-icon-button--quiet.menu{
 .tabs .topcoat-tab-bar{
     margin:0px auto;
 }
+
+
+
+input.ng-valid{
+    border-color:green;
+}
+input.ng-invalid,.topcoat-text-input:invalid {
+    border:1px solid #0036ff;
+}
+input.ng-dirty.ng-invalid{
+    border-color:red;
+};
