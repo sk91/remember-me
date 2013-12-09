@@ -23,6 +23,9 @@
       $rootScope.buttons={};
 
       $rootScope.staticUrl = function(object){
+        if(!object || object === ""){
+          object = $rootScope.main_config.default_deceased_image;
+        }
         return $rootScope.main_config.static_url + object;
       }
 
