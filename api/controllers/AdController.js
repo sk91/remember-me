@@ -82,7 +82,6 @@ module.exports = {
     add_date_cretaria(query,death_date_before,"deceased.death_date",'<=');
     add_date_cretaria(query,death_date,"deceased.death_date");
 
-    console.log(query);
     query.exec(function found_ads(err,data){
       if(err) return next(err);
       res.send(data);
