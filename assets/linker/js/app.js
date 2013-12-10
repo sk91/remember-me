@@ -6,7 +6,7 @@
     'ngRoute',
     'ngAnimate',
     'ngAutocomplete',
-    'imageupload',
+    'angularFileUpload',
     'MyApp.controllers',
     'MyApp.restServices'
   ]).

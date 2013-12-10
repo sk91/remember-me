@@ -10,7 +10,7 @@
     .controller('CreateObitCtrl',['$scope','$rootScope','Ad',create_obit_controller])
     .controller('CreateSympathyCtrl',['$scope','$rootScope','Ad',create_sympathy_controller])
     .controller('DeceasedProfileCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_profile_controller])
-    .controller('DeceasedEditCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_edit_controller])
+    .controller('DeceasedEditCtrl',['$scope','$rootScope','$routeParams','$upload','Deceased',deceased_edit_controller])
     .controller("DeceasedChooserCtrl",['$scope',"$rootScope",'Deceased',deceased_chooser_controller])
     .controller('ArticleCtrl',['$scope','$rootScope','$routeParams','Category', 'Article',article_controller])
     .controller('AccountCtrl',['$scope','$rootScope',account_controller])
@@ -191,9 +191,13 @@
       });
       $rootScope.title = "Deceased profile";
     }
-     function deceased_edit_controller($scope,$rootScope,$routeParams,Deceased){
+     function deceased_edit_controller($scope,$rootScope,$routeParams,$upload,Deceased){
       $rootScope.resetButtons(['back']);
       $rootScope.title = "Deceased edit";
+
+      $scope.upload = false;
+      $scope.progress= 0;
+
       
       $scope.birth_address_details = "";
       $scope.birth_address_options ={
@@ -204,13 +208,30 @@
 
       
       $scope.deceased=null;
+
       Deceased.get({id:$routeParams.id},function(deceased){
         deceased.birth_date = moment(deceased.birth_date).format("YYYY-MM-DD");
         deceased.death_date = moment(deceased.death_date).format("YYYY-MM-DD");
         $scope.deceased = deceased;
       });
       
-      
+      $scope.onFileSelect = function($files){
+        $scope.upload= $upload.upload({
+          method:"POST",
+          url:"/deceaseds/"+$scope.deceased.id + "/photo",
+          file:$files[0],
+          fileFormDataName:"photo"
+        }).progress(function(evt){
+          $scope.progress =parseInt(100 * evt.loaded / evt.total);
+        }).success(function(data,status,headers,config){
+          if(status == 200){
+            $scope.deceased.photo = data.photo;
+          }
+        }).then(function(){
+          $scope.upload = false;
+          $scope.progress= 0;
+        });
+      }
 
       $scope.saveDeceased = function(deceased){
         deceased.$update(function(deceased,headers){

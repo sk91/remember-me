@@ -36,7 +36,6 @@ module.exports = {
 
 
   uploadPhoto:function(req,res,next){
-
     if(!("photo" in req.files)|| Array.isArray(req.files.photo)){
       return res.send(400,{error:"No photo uploaded"});
     }
@@ -87,9 +86,10 @@ module.exports = {
       uploader.on("end",function file_uploaded(){
         clean_fs(photo);
         deceased.photo=filename;
-        Ad.update({'deceased.id':deceased.id},{'deceased':deceased},function deceasedAdsFound(err,ads){
-          deceased.save(function save_deceased(err){
-            res.send({photo:filename});
+        deceased.save(function save_deceased(err){
+          if(err) return res.end(500,{error:err});
+          Ad.update({'deceased.id':deceased.id},{'deceased':deceased},function deceasedAdsFound(err,ads){
+              res.send({photo:filename});
           })
         });
       });

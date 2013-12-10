@@ -47,6 +47,7 @@ module.exports = function (grunt) {
 
     // Below, as a demonstration, you'll see the built-in dependencies 
     // linked in the proper order order
+    'linker/js/lib/angular-fileupload-shim.js',
     'linker/js/lib/jquery.js',
     'linker/js/lib/angular.js',
 

@@ -1,7 +1,16 @@
 
 <div class="details">
+	<img ng-src="{{staticUrl(deceased.photo)}}"/>
+	<div class="row" ng-hide="upload">
+		<label> Change picture:</label>
+		<input type="file"  ng-file-select="onFileSelect($files)" accept="image/gif, image/jpeg, image/gif">
+	</div>
+	<div class="row" ng-show="upload">
+		<label> Uploading: </label>
+		<progress max="100" ng-model="progress">{{progress}}%</progress>
+	</div>
+	
 	<form  class="form" novalidate>
-			
 		<h2>Details</h2>
 		<label>Full name:</label>
 		<input type="text" class="topcoat-text-input" ng-model="deceased.name" placeholder="Full Name" required ng-minlength="2"/>
