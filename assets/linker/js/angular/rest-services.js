@@ -16,10 +16,24 @@
 
 
   var deceased_factory = function($resource,User){
-    var Deceased = $resource("/deceaseds/:id",{id:"@id"});
+    var Deceased = $resource("/deceaseds/:id",{id:"@id"},{ 
+      'get': {method:'GET'},
+      'create':   {method:'POST'},
+      'update':   {method:'PUT'},
+      'query':  {method:'GET', isArray:true},
+      'remove': {method:'DELETE'},
+      'delete': {method:'DELETE'} 
+    });
     Deceased.prototype.getResponsible = function(cb){
       return User.get({id:this.responsible.id},cb);
     };
+
+
+    Deceased.prototype.create = function(cb){
+      this.birth_date = new Date(this.birth_date).toISOString();
+      this.death_date = new Date(this.death_date).toISOString();
+      this.$create(cb);
+    }
 
     return Deceased;
   };

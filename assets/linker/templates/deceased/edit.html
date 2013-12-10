@@ -1,3 +1,44 @@
-Edit
 
-{{deceased.name}}  {{deceased.last_name}}
+<div class="details">
+	<form  class="form" novalidate>
+			
+		<h2>Details</h2>
+		<label>Full name:</label>
+		<input type="text" class="topcoat-text-input" ng-model="deceased.name" placeholder="Full Name" required ng-minlength="2"/>
+		<label>Middle name:</label>
+		<input type="text" class="topcoat-text-input" ng-model="deceased.middle_name" placeholder="Middle Name" ng-minlength="2"/>
+		<label>Last Name:</label>
+		<input type="text" class="topcoat-text-input" ng-model="deceased.last_name" placeholder="Last Name" required ng-minlength="2"/>
+		<label>Passport:</label>
+		<input type="text" class="topcoat-text-input" ng-model="deceased.passport" placeholder="Passport" required ng-minlenght="5" ng-maxlength ="9"/>
+		<div class="row">
+			<label>
+				<span>Birth date:</span>
+				<input ng-model="deceased.birth_date" class="topcoat-text-input" type="date" placeholder="Birth Date" required="required"/>
+			</label>
+			<label>
+				<span>Death date:</span>
+				<input ng-model="deceased.death_date" class="topcoat-text-input" type="date" placeholder="Death date" required="required"/>
+			</label>
+		</div>
+		<label>Birth address:</label>
+		<input type="text" id ="birth_address" ng-model="deceased.birth_address" class="topcoat-text-input" ng-autocomplete='deceased.birth_address' options="birth_address_options" details="birth_address_details" placeholder="Birth address" value="Haifa"/>
+		{{deceased.birth_address}}
+		<label>Last address:</label>
+		<input type="text"  class="topcoat-text-input" ng-autocomplete='deceased.address' options="death_address_options" details="death_address_details" placeholder="Last address"/>
+
+
+		<label>Graveyard Name:</label>
+		<input type="text" class="topcoat-text-input" ng-model="deceased.graveyard.name" placeholder="Graveyard name"/>
+		<label>Block:</label>
+
+		<h2>About:</h2>
+		<textarea ng-model="deceased.about" class="topcoat-textarea"></textarea>
+		
+		<button ng-click="saveDeceased(deceased)" ng-disabled="form.$invalid" class='topcoat-button'>Save changes</button>
+
+	
+	</form>
+
+
+</div>

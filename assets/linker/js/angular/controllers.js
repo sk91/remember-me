@@ -138,10 +138,8 @@
 
       $scope.createDeceased = function(new_deceased){
         var deceased = angular.copy(new_deceased);
-        deceased.birth_date = new Date(deceased.birth_date).toISOString();
-        deceased.death_date = new Date(deceased.death_date).toISOString();
         deceased = new Deceased(deceased);
-        deceased.$save(function(u,headers){
+        deceased.create(function(u,headers){
           if(!("status" in u)){
             $rootScope.go("/ads/new/" + u.id);
           }
@@ -186,12 +184,39 @@
         $rootScope.go("/ads/new/" + $scope.deceased.id);
       }
       $scope.deceased = Deceased.get({id:$routeParams.id});
+      Deceased.get({id:$routeParams.id},function(deceased){
+        deceased.birth_date = new Date(deceased.birth_date);
+        deceased.death_date = new Date(deceased.death_date);  
+        $scope.deceased = deceased;
+      });
       $rootScope.title = "Deceased profile";
     }
      function deceased_edit_controller($scope,$rootScope,$routeParams,Deceased){
       $rootScope.resetButtons(['back']);
-      $scope.deceased = Deceased.get({id:$routeParams.id});
       $rootScope.title = "Deceased edit";
+      
+      $scope.birth_address_details = "";
+      $scope.birth_address_options ={
+        country:'il'
+      };
+      $scope.death_address_details = "";
+      $scope.death_address_options = null;
+
+      
+      $scope.deceased=null;
+      Deceased.get({id:$routeParams.id},function(deceased){
+        deceased.birth_date = moment(deceased.birth_date).format("YYYY-MM-DD");
+        deceased.death_date = moment(deceased.death_date).format("YYYY-MM-DD");
+        $scope.deceased = deceased;
+      });
+      
+      
+
+      $scope.saveDeceased = function(deceased){
+        deceased.$update(function(deceased,headers){
+          $rootScope.go('/ads/new/'+deceased.id);
+        });
+      }
     }
 
     function deceased_chooser_controller($scope,$rootScope,Deceased){

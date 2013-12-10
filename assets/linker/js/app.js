@@ -5,6 +5,7 @@
     'ngTouch',
     'ngRoute',
     'ngAnimate',
+    'ngAutocomplete',
     'imageupload',
     'MyApp.controllers',
     'MyApp.restServices'
