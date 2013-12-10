@@ -85,16 +85,24 @@ module.exports = {
 
       uploader.on("end",function file_uploaded(){
         clean_fs(photo);
+        var previous_photo = deceased.photo;
         deceased.photo=filename;
         deceased.save(function save_deceased(err){
-          if(err) return res.end(500,{error:err});
+          if(err) {
+            remove_from_s3(filename);
+            return res.end(500,{error:err});
+          }
           Ad.update({'deceased.id':deceased.id},{'deceased':deceased},function deceasedAdsFound(err,ads){
-              res.send({photo:filename});
+            remove_from_s3(previous_photo);
+            res.send({photo:filename});
           })
         });
       });
 
-
+      function remove_from_s3(photo){
+        if(!photo || photo === "") return;
+        s3_client.knox.deleteFile(photo,function(){});
+      }
       function clean_fs(photo){
         fs.unlink(photo.path);
       }

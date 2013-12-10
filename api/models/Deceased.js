@@ -64,8 +64,12 @@ module.exports = {
       type:'array',
       model:'photo'
     },
+    birth_address:{
+      type:'string',
+      location:true
+    },
     address:{
-      type:'json',
+      type:'string',
       location:true
     },
     responsible:{

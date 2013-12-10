@@ -197,14 +197,14 @@
 
       $scope.upload = false;
       $scope.progress= 0;
-
       
       $scope.birth_address_details = "";
-      $scope.birth_address_options ={
+      $scope.birth_address_options = null;
+      $scope.death_address_details = "";
+      $scope.death_address_options = {
         country:'il'
       };
-      $scope.death_address_details = "";
-      $scope.death_address_options = null;
+
 
       
       $scope.deceased=null;
@@ -214,7 +214,7 @@
         deceased.death_date = moment(deceased.death_date).format("YYYY-MM-DD");
         $scope.deceased = deceased;
       });
-      
+
       $scope.onFileSelect = function($files){
         $scope.upload= $upload.upload({
           method:"POST",
@@ -234,6 +234,7 @@
       }
 
       $scope.saveDeceased = function(deceased){
+        console.log(deceased);
         deceased.$update(function(deceased,headers){
           $rootScope.go('/ads/new/'+deceased.id);
         });
