@@ -1,0 +1,27 @@
+<div class="details">
+	<div class="block">
+		<h1>{{deceased.last_name}} {{deceased.name}}</h1>
+	</div>
+	<div class="block">
+		<form  class="form" novalidate>
+			<h2>Burial details:</h2>
+			<input type="text" class="topcoat-text-input" ng-model="deceased.graveyard" placeholder="Graveyard name"/>
+			<input type="text" class="topcoat-text-input" placeholder="Grief addresss"/>
+			<div class="row">
+				<label>Burial date:</label><input type="date"  class="topcoat-text-input"ng-model="deceased.burial_date"/>
+			</div>
+
+			<h2>Grief details:</h2>
+			<input type="text" class="topcoat-text-input" ng-model="ad.details.grief_location_name" placeholder="Location name" />
+			<input type="text" class="topcoat-text-input" ng-model="ad.details.grief_location_address" placeholder="Location address"/>
+			<div class="row">
+				<label>Grief date:</label>
+				<input type="date" class="topcoat-text-input" ng-model="ad.details.grief.date"/>
+			</div>
+			<h2>Ad message</h2>
+			<textarea ng-model="ad.details.message" class="topcoat-textarea"></textarea>
+			<button ng-click="createAd()" ng-disabled="form.$invalid" class='topcoat-button'>Create Ad</button>
+		</form>
+	</div>
+
+</div>

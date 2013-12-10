@@ -47,8 +47,7 @@ module.exports = {
       type:'date'
     },
     graveyard:{
-      type:'json',
-      location:true
+      type:'string'
     },
     photo:{
       type:'string'

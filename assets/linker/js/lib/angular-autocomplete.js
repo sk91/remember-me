@@ -37,7 +37,7 @@ angular.module( "ngAutocomplete", [])
 
         //options for autocomplete
         var opts
-          , first = true
+
         //convert options provided to opts
         var initOpts = function() {
           opts = {}
@@ -79,11 +79,6 @@ angular.module( "ngAutocomplete", [])
         scope.$watch(scope.watchOptions, function () {
           initOpts()
           newAutocomplete()
-          if(!first){
-            element[0].value = '';
-          } else{
-            first = false;
-          }
           scope.ngAutocomplete = element.val();
         }, true);
       }

@@ -7,8 +7,8 @@
     .controller('AdsCtrl',['$scope','$rootScope','Ad',ads_controller])
     .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', "Deceased", ad_details_controller])
     .controller('NewAdCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',new_ad_controller])
-    .controller('CreateObitCtrl',['$scope','$rootScope','Ad',create_obit_controller])
-    .controller('CreateSympathyCtrl',['$scope','$rootScope','Ad',create_sympathy_controller])
+    .controller('CreateObitCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',create_obit_controller])
+    .controller('CreateSympathyCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',create_sympathy_controller])
     .controller('DeceasedProfileCtrl',['$scope','$rootScope','$routeParams','Deceased',deceased_profile_controller])
     .controller('DeceasedEditCtrl',['$scope','$rootScope','$routeParams','$upload','Deceased',deceased_edit_controller])
     .controller("DeceasedChooserCtrl",['$scope',"$rootScope",'Deceased',deceased_chooser_controller])
@@ -148,14 +148,37 @@
     }
     
 
-    function create_obit_controller($scope,$rootScope,Ad){
+    function create_obit_controller($scope,$rootScope, $routeParams,Ad, Deceased){
       $rootScope.resetButtons(['back']);
       $rootScope.title ="Create obit ad";
+
+      $scope.deceased = Deceased.get({id:$routeParams.deceased});
+      $scope.ad = {};
+
+      $scope.createAd = function(){
+        console.log($scope.ad, $scope.deceased);
+      }
+
     }
 
-    function create_sympathy_controller($scope,$rootScope,Ad){
+    function create_sympathy_controller($scope,$rootScope,$routeParams,Ad,Deceased){
       $rootScope.resetButtons(['back']);
       $rootScope.title ="Create sympathy ad";
+      $scope.deceased = Deceased.get({id:$routeParams.deceased});
+      $scope.name = "";
+      $scope.last_name ="";
+      $scope.phone = "";
+      $scope.message = "";
+      $scope.image = "";
+
+
+      $scope.uploadImage = function(){
+
+      }
+
+      $scope.createAd = function(){
+
+      }
     }
 
     function ad_details_controller($scope,$rootScope,$routeParams,Ad,Deceased){
