@@ -1,1 +1,24 @@
-List sub categories and articles here
+
+<div ng-if="sub_categories.length>0" class="topcoat-list__container">
+      <h1>Sub categories</h1>  
+    <ul class="topcoat-list list ads-list">
+        <li ng-repeat="subc in sub_categories | orderBy:'name"  class="topcoat-list__item ">
+            <a ng-click="go('/category/'+subc.id)">
+                <img ng-src="{{staticUrl(subc.image)}}" >
+                <p>{{subc.name}}</p>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<div ng-if="articles.length>0" class="topcoat-list__container">
+    <h1>Articles</h1>  
+    <ul class="topcoat-list list ads-list">
+        <li ng-repeat="article in articles | orderBy:'name'"  class="topcoat-list__item ">
+            <a ng-click="go('/article/'+article.id)">
+                <img ng-src="{{staticUrl(article.small_image)}}" >
+                <p>{{article.name}}</p>
+            </a>
+        </li>
+    </ul>
+</div>

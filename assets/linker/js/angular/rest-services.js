@@ -44,7 +44,7 @@
   };
 
   var category_factory = function($resource){
-    var Category = $resource("/categorys/:id",{id:"@id"});
+    var Category = $resource("/categories/:id",{id:"@id"});
     return Category;
   };
 
@@ -65,7 +65,8 @@
     .factory("User",['$resource', user_factory])
     .factory("Category",['$resource',category_factory])
     .factory("Article",['$resource', article_factory])
-    .factory("Config",['$resource', config_factory]);
+    .factory("Config",['$resource', config_factory])
+    .factory("Session",[function(){}]);
 
     
 })(angular);  

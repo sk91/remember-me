@@ -17,6 +17,13 @@ module.exports = {
   },
 
   attributes: {
+    name:{
+      type:"string",
+      required:true
+    },
+    text:{
+      type:"string"
+    },
   	category:{
       type:"string",
       model:'category',

@@ -23,7 +23,7 @@ module.exports = {
 
     name:{
       type:'string',
-      minLenght:2,
+      minLength:2,
       required:true
     },
 

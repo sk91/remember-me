@@ -57,7 +57,8 @@ module.exports = function (grunt) {
     // then beef it up with some convenience logic for talking to Sails.js
     'linker/js/lib/sails.io.js',
     'linker/js/lib/*.js',
-    'linker/js/angular/*.js',
+    'linker/js/angular/definitions.js',
+    'linker/js/angular/**/*.js',
     'linker/js/app.js',
    
 

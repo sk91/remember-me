@@ -1,0 +1,17 @@
+<div class="details">
+	<div class="block">
+		<button class="topcoat-button--cta">I have an account</button>
+	</div>
+	<div class="block">
+		<form  class="form" novalidate>
+			<input type="text" class="topcoat-text-input" placeholder="Name" ng-minlength="2" required>
+			<input type="text" class="topcoat-text-input" placeholder="Last Name" ng-minlength="2" required>
+			<input type="text" class="topcoat-text-input" placeholder="Passport" ng-minlength="5" ng-minlength="9" required>
+			<input type="email" class="topcoat-text-input" placeholder="Email" required>
+			<input type="text" class="topcoat-text-input" placeholder="Phone" required>
+			<input type="password" class="topcoat-text-input" placeholder="Password" required>
+			<button ng-click="register()" ng-disabled="form.$invalid" class='topcoat-button'>Register</button>
+		</form>
+	</div>
+</div>
+

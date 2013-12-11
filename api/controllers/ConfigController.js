@@ -36,10 +36,10 @@ module.exports = {
           path:"/ads",
           label:"Main"
         },{
-          path:'/category/information',
+          path:'/category/52a834a472b9d89814000002',
           label:"Information",
         },{
-          path:'/category/services',
+          path:'/category/52a8349672b9d89814000001',
           label:"Services"
         }
         
