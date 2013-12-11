@@ -11,7 +11,7 @@
             <a ng-click="go('/deceased/'+ad.deceased.id)" ng-if="ad.details.type=='deceased'" class="deceased">
                 <img ng-src="{{staticUrl(ad.deceased.photo)}}" >
                 <p>{{ad.deceased.last_name}} {{ad.deceased.name}}</p>
-                <p>{{ad.deceased.birth_date | date:'yyyy'}}-{{ad.deceased.death_date | date: 'yyyy'}}</p>
+                <p>{{ad.deceased.death_date | date: 'dd-MM-yyyy'}}</p>
                 <span class="chevron icomatic">next</span>
             </a>
              <a ng-click="go('/ads/'+ad.id)" ng-if="ad.details.type=='obit'" class="obit">
