@@ -548,7 +548,7 @@ input.ng-dirty.ng-invalid{
     .topcoat-navigation-bar__title{
         font-size: 1rem;
     }.details .form label{
-        line-height: 1rem;
-        height: 1rem;
+        line-height: 2rem;
+        height: 2rem;
     }
 }

@@ -35,6 +35,8 @@
 		<div class="row">
 			<label>Birth date</label>
 			<input ng-model="new_deceased.birth_date" class="topcoat-text-input" type="date" placeholder="Birth Date" required="required"/>
+		</div>
+		<div class="row">
 			<label>Death date</label>
 			<input ng-model="new_deceased.death_date" class="topcoat-text-input" type="date" placeholder="Death date" required="required"/>
 		</div>
@@ -49,8 +51,10 @@
 				<div class="topcoat-radio-button__checkmark"></div>
 				<span>Female</span>
 			</label>
+			</div>
 		<div class="row">
-		<button ng-click="createDeceased(new_deceased)" ng-disabled="form.$invalid" class='topcoat-button'>Add</button>
+			<button ng-click="createDeceased(new_deceased)" ng-disabled="form.$invalid" class='topcoat-button'>Add</button>
+		</div>
 	</form>
 		
 
