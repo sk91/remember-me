@@ -487,6 +487,10 @@ input.ng-dirty.ng-invalid{
     .main-content{
         top:2rem;
     }
+
+    .side-nav__list__container{
+        top:2rem;
+    }
     .list > li img {
         width:47px;
         height: 47px;
