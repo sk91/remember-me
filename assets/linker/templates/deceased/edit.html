@@ -24,14 +24,10 @@
 			<label>Passport:</label>
 			<input type="text" class="topcoat-text-input" ng-model="deceased.passport" placeholder="Passport" required ng-minlenght="5" ng-maxlength ="9"/>
 			<div class="row">
-				<label>
-					<span>Birth date:</span>
-					<input ng-model="deceased.birth_date" class="topcoat-text-input" type="date" placeholder="Birth Date" required="required"/>
-				</label>
-				<label>
-					<span>Death date:</span>
-					<input ng-model="deceased.death_date" class="topcoat-text-input" type="date" placeholder="Death date" required="required"/>
-				</label>
+				<label>Birth date:</label>
+				<input ng-model="deceased.birth_date" class="topcoat-text-input" type="date" placeholder="Birth Date" required="required"/>
+				<label>Death date:</label>
+				<input ng-model="deceased.death_date" class="topcoat-text-input" type="date" placeholder="Death date" required="required"/>
 			</div>
 			<label>Birth address:</label>
 			<input type="text" id ="birth_address" class="topcoat-text-input" ng-autocomplete='deceased.birth_address' options="birth_address_options" details="birth_address_details" placeholder="Birth address" ng-value="deceased.birth_address"/>

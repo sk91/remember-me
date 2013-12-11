@@ -11,7 +11,7 @@
             <a ng-click="go(personChooser.next + '/' + deceased.id)">
                 <img ng-src="{{staticUrl(deceased.photo)}}" >
                 <p>{{deceased.last_name}} {{deceased.name}}</p>
-                <p>{{deceased.birth_date | date:'yyyy'}}-{{deceased.death_date | date: 'yyyy'}}</p>
+                <p>{{deceased.death_date | date: 'dd-MM-yyyy'}}</p>
             </a>
         </li>
     </ul>
