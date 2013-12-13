@@ -10,7 +10,7 @@
 			<input class="topcoat-text-input"  type="text" placeholder="Phone" ng-model="phone"/>
 			<div class="row">
 				<label>Image:</label>
-				<input type="file"/>
+				<input type="file" ng-file-select="onFileSelect($files)"/>
 			</div>
 
 			<h2>Message</h2>

@@ -12,7 +12,6 @@
 </div>
 
 <div ng-if="articles.length>0" class="topcoat-list__container">
-    <h2>Articles</h2>  
     <ul class="topcoat-list list ads-list">
         <li ng-repeat="article in articles | orderBy:'name'"  class="topcoat-list__item ">
             <a ng-click="go('/article/'+article.id)">

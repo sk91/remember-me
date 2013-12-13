@@ -53,7 +53,7 @@
           method:"POST",
           url:"/deceaseds/"+$scope.deceased.id + "/photo",
           file:$files[0],
-          fileFormDataName:"photo"
+          fileFormDataName:"photo",
         }).progress(function(evt){
           $scope.progress =parseInt(100 * evt.loaded / evt.total);
         }).success(function(data,status,headers,config){

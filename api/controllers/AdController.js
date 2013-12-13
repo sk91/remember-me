@@ -15,7 +15,12 @@
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
 
-var _ = require('lodash');
+var s3 = require("s3")
+  , UUIDGenerator = require('node-uuid')
+  , _ = require('lodash')
+  , fs = require('fs')
+  , path = require('path')
+  , async = require('async');
 
 module.exports = {
     
@@ -29,10 +34,12 @@ module.exports = {
   _config: {},
 
 
-  index:function(req,res,next){
+  find:function(req,res,next){
 
-    var full_name = req.param('full_name')
+    var id = req.param('id')
+      , full_name = req.param('full_name')
       , name = req.param('name')
+      , type = req.param('type')
       , last_name = req.param('last_name')
       , death_date_before= req.param('death_date_before')
       , death_date_after = req.param('death_date_after')
@@ -41,6 +48,16 @@ module.exports = {
       , birth_date_after = req.param('birth_date_after')
       , birth_date = req.param('birth_date')
       , query = Ad.find();
+
+    if(id){
+      return Ad.findOne({id:id}, function found_ad(err,data){
+        if(err) return next({err:err});
+        if(!data){
+          return res.send(404);
+        }
+        res.json(data.toJSON());
+      });
+    }
 
     if(full_name){
       var where_query = [];
@@ -74,6 +91,9 @@ module.exports = {
     if(last_name){
       query.where({'deceased.last_name':last_name})
     }
+    if(type){
+      query.where({'details.type':type});
+    }
 
     add_date_cretaria(query,birth_date_after,"deceased.birth_date",'>=');
     add_date_cretaria(query,birth_date_before,"deceased.birth_date",'<=');
@@ -82,12 +102,89 @@ module.exports = {
     add_date_cretaria(query,death_date_before,"deceased.death_date",'<=');
     add_date_cretaria(query,death_date,"deceased.death_date");
 
-    query.exec(function found_ads(err,data){
+    query.exec(function found_ads(err,ads){
       if(err) return next({err:err});
-      res.send(data);
+      var json_ads = [];
+
+      ads.forEach(function(ad){
+        json_ads.push(ad.toJSON());
+      })
+      res.json(json_ads);
     })
-  },  
+  },
+
+  create:function(req,res,next){
+    var ad;
+    if(req.is('json')){
+      ad = req.param.all();
+    }else{
+      ad= JSON.parse(req.param('data'));
+    }
+
+    if(!("photo" in req.files) || !ad.details || ad.details.type!=='sympathy'){
+      return create_ad();
+    }
+
+    var photo = req.files.photo
+      , s3_client = s3.createClient({
+          key:sails.config.aws.s3_key,
+          secret:sails.config.aws.s3_secret,
+          bucket:sails.config.aws.s3_bucket
+        })
+      , extension = path.extname(photo.name)
+      , uuid = UUIDGenerator.v1()
+      , filename
+      , headers;
+
+      if(!_.contains(sails.config.file.image_content_types,photo.headers['content-type'])){
+        clean_fs(photo);
+        return res.send(400,{"error":"Invalid content type"});
+      }
+      if(!_.contains(sails.config.file.image_extensions,extension)){
+        clean_fs(photo);
+        return res.send(400,"Invalid extension type");
+      }
+
+      headers = {
+        "Content-Type": photo.headers['content-type']
+      };
+
+      filename = sails.config.aws.ad_image_path.replace(':name',uuid  + extension) ;
+
+      var uploader = s3_client.upload(photo.path, filename,headers);
+
+      uploader.on("error", function file_upload_error(err){
+        clean_fs(photo);
+        res.send(500,{error:err});
+      });
+
+      uploader.on("end",function file_uploaded(){
+        clean_fs(photo);
+        ad.details.from['photo']=filename;
+        create_ad();
+      });
+
+      function remove_from_s3(photo){
+        if(!photo || photo === "") return;
+        s3_client.knox.deleteFile(photo,function(){});
+      }
+      function clean_fs(photo){
+        fs.unlink(photo.path);
+      }
+
+      function create_ad(){
+        Ad.create(ad,function(err,created){
+          if(err){
+             remove_from_s3(filename);
+             return res.send(500,{error:err})
+          } 
+          res.json(created.toJSON());
+        });
+    }
+  }
 };
+
+
 
 function add_date_cretaria(query,date,field,range){
   if(!date) return;

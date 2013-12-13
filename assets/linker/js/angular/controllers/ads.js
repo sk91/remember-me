@@ -79,7 +79,7 @@
       }
     },
 
-    "newSympathy":function($scope,$rootScope,$routeParams,Ad,Deceased){
+    "newSympathy":function($scope,$rootScope,$routeParams,$upload,Ad,Deceased){
       $rootScope.resetButtons(['back']);
       $rootScope.title ="Create sympathy ad";
       $scope.deceased = Deceased.get({id:$routeParams.deceased});
@@ -89,13 +89,50 @@
       $scope.message = "";
       $scope.image = "";
 
-
-      $scope.uploadImage = function(){
-
+      $scope.onFileSelect = function($files){
+        $scope.img = $files[0];
       }
 
       $scope.createAd = function(){
-
+        var ad = {
+          details:{
+            type:"sympathy",
+            from:{
+              name:$scope.name,
+              last_name:$scope.last_name,
+              phone:$scope.phone,
+              photo:$scope.image
+            },
+            message:$scope.message
+          },
+          deceased:{
+            id:$scope.deceased.id
+          }
+        };
+        if($scope.img){
+          $scope.upload= $upload.upload({
+            method:"POST",
+            url:"/ads/",
+            file:$scope.img,
+            fileFormDataName:"photo",
+            data:{data:ad}
+          }).progress(function(evt){
+            $scope.progress =parseInt(100 * evt.loaded / evt.total);
+          }).success(function(ad,status,headers,config){
+            if(status == 200){
+              $rootScope.go('/ads/' + ad.id);
+            }
+          }).then(function(){
+            $scope.upload = false;
+            $scope.progress= 0;
+          });
+        }else{
+          Ad.create(ad,function(ad,headers){
+            if(!('status' in ad)){
+              $rootScope.go('/ads/' + ad.id);
+            }
+          })
+        }
       }
     }
     
@@ -108,7 +145,7 @@
     .controller('AdDetailsCtrl',['$scope','$rootScope','$routeParams','Ad', "Deceased", AdsController.one])
     .controller('NewAdCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',AdsController.new])
     .controller('CreateObitCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',AdsController.newObit])
-    .controller('CreateSympathyCtrl',['$scope','$rootScope','$routeParams','Ad', 'Deceased',AdsController.newSympathy])
+    .controller('CreateSympathyCtrl',['$scope','$rootScope','$routeParams','$upload','Ad', 'Deceased',AdsController.newSympathy])
   
 
 })(angular);
