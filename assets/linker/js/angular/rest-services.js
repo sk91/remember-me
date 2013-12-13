@@ -1,7 +1,14 @@
 (function(angular){
   'use strict';
   var ad_factory = function($resource,Deceased){
-    var Ad = $resource("/ads/:id",{id:"@id"});
+    var Ad = $resource("/ads/:id",{id:"@id"},{ 
+      'get': {method:'GET'},
+      'create':   {method:'POST'},
+      'update':   {method:'PUT'},
+      'query':  {method:'GET', isArray:true},
+      'remove': {method:'DELETE'},
+      'delete': {method:'DELETE'} 
+    });
 
     Ad.prototype.getDeceased=function(cb){
       return Deceased.get({id:this.deceased.id},cb);

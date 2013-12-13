@@ -116,12 +116,12 @@ module.exports = {
   create:function(req,res,next){
     var ad;
     if(req.is('json')){
-      ad = req.param.all();
+      ad = req.params.all();
     }else{
       ad= JSON.parse(req.param('data'));
     }
 
-    if(!("photo" in req.files) || !ad.details || ad.details.type!=='sympathy'){
+    if(!req.files || !("photo" in req.files) || !ad.details || ad.details.type!=='sympathy'){
       return create_ad();
     }
 

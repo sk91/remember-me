@@ -6,11 +6,21 @@
         <img ng-src="{{staticUrl(ad.details.from.photo)}}" ng-if="ad.details.type=='sympathy'"/>
     </div>
     <div class="block">
-        <h1>
-            {{deceased.title}} {{deceased.name}} {{deceased.middle_name}} {{deceased.last_name}} 
-        </h1>
-        <h2>{{deceased.birth_date | date:'MM.yyyy'}}-{{deceased.death_date | date: 'MM.yyyy'}}</h2>
+        <a ng-click="go('/deceased/'+deceased.id)">
+            <h1>
+                {{deceased.title}} {{deceased.name}} {{deceased.middle_name}} {{deceased.last_name}} 
+            </h1>
+            <h2>{{deceased.birth_date | date:'MM.yyyy'}}-{{deceased.death_date | date: 'MM.yyyy'}}</h2>
+        </a>
     </div>
+    <div class="block" ng-if="ad.details.type=='obit'" >
+        <h2>Burial will take place at {{deceased.graveyard}} on {{deceased.burial_date | date:'dd.MM.yy hh:mm'}}</h2>
+    </div>
+    <div class="block" ng-if="ad.details.type=='obit'">
+        <h2>Grief will take place at {{ad.details.grief_location_name}} on {{ad.details.grief_date | date:'dd.MM.yy hh:mm'}}</h2>
+        <h2>Address: {{ad.details.grief_location_address}}</h2>
+    </div>
+
 
     <div class="block">
         <h1>Message</h1>

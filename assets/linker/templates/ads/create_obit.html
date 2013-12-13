@@ -6,17 +6,16 @@
 		<form  class="form" novalidate>
 			<h2>Burial details:</h2>
 			<input type="text" class="topcoat-text-input" ng-model="deceased.graveyard" placeholder="Graveyard name"/>
-			<input type="text" class="topcoat-text-input" placeholder="Grief addresss"/>
 			<div class="row">
-				<label>Burial date:</label><input type="date"  class="topcoat-text-input"ng-model="deceased.burial_date"/>
+				<label>Burial date:</label><input type="date"  class="topcoat-text-input" ng-model="deceased.burial_date"/>
 			</div>
 
 			<h2>Grief details:</h2>
-			<input type="text" class="topcoat-text-input" ng-model="ad.details.grief_location_name" placeholder="Location name" />
-			<input type="text" class="topcoat-text-input" ng-model="ad.details.grief_location_address" placeholder="Location address"/>
+			<input type="text" class="topcoat-text-input" ng-model="ad.details.grief_location_name" placeholder="Griefing at" />
+			<input type="text" class="topcoat-text-input" ng-autocomplete='ad.details.grief_location_address' options="grief_address_options" details="grief_address_details"  ng-value="ad.details.grief_location_address" placeholder="Grief addresss"/>
 			<div class="row">
 				<label>Grief date:</label>
-				<input type="date" class="topcoat-text-input" ng-model="ad.details.grief.date"/>
+				<input type="date" class="topcoat-text-input" ng-model="ad.details.grief_date"/>
 			</div>
 			<h2>Ad message</h2>
 			<textarea ng-model="ad.details.message" class="topcoat-textarea"></textarea>

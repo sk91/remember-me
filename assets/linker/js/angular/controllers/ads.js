@@ -46,7 +46,7 @@
         }else{
           $rootScope.title = "Sympathy";
         }
-        $scope.deceased= ad.deceased;
+        $scope.deceased= Deceased.get({id:ad.deceased.id});
       });
     },
     "new": function($scope,$rootScope,$routeParams,Ad,Deceased){
@@ -71,11 +71,33 @@
       $rootScope.resetButtons(['back']);
       $rootScope.title ="Create obit ad";
 
+      $scope.grief_address_details = "";
+      $scope.griefs_address_options = {
+        country:'il'
+      };
+
       $scope.deceased = Deceased.get({id:$routeParams.deceased});
-      $scope.ad = {};
+      $scope.ad = {
+        details:{
+          type:'obit'
+        }
+      };
+
 
       $scope.createAd = function(){
-        console.log($scope.ad, $scope.deceased);
+        $scope.deceased.$update(function(deceased,headers){
+            if(!('status' in deceased)){
+              $scope.ad['deceased']={
+                id:deceased.id
+              };
+              Ad.create($scope.ad,function(ad,headers){
+                if(!('status' in ad)){
+                  $rootScope.go("/ads/"+ad.id);
+                }
+              });
+            }
+        });
+       
       }
     },
 
