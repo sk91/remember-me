@@ -3,10 +3,10 @@
 		<h2>{{deceased.last_name}} {{deceased.name}}</h2>
 	</div>
 	<div class="block">
-		<form class="form" novalidate>
+		<form name="form" class="form" novalidate>
 			<h2>Sympathiser details</h2>
-			<input class="topcoat-text-input"  type="text" placeholder="Name" ng-model="name"/>
-			<input class="topcoat-text-input"  type="text" placeholder="Last name" ng-model="last_name"/>
+			<input class="topcoat-text-input"  type="text" placeholder="Name" ng-model="name" required/>
+			<input class="topcoat-text-input"  type="text" placeholder="Last name" ng-model="last_name" required/>
 			<input class="topcoat-text-input"  type="text" placeholder="Phone" ng-model="phone"/>
 			<div class="row">
 				<label>Image:</label>
@@ -14,7 +14,7 @@
 			</div>
 
 			<h2>Message</h2>
-			<textarea class="topcoat-textarea" ng-model="message"></textarea>
+			<textarea class="topcoat-textarea" ng-model="message" required  ng-minlength="5"></textarea>
 			<button ng-click="createAd()" ng-disabled="form.$invalid" class='topcoat-button'>Create Ad</button>
 		</form>
 	</div>
