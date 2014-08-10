@@ -1,2 +1,5 @@
 # dead-people
-### a Sails application
+### Desceased Board Mobile app
+
+
+### Demo: 
