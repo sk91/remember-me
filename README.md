@@ -1,5 +1,5 @@
 # dead-people
-### Desceased Board Mobile app
+### Desceased Board Mobile App
 
 
-### Demo: 
+[Demo](http://deadpeople.herokuapp.com/)
