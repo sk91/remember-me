@@ -1,8 +1,8 @@
 {
-  "name": "dead-people",
+  "name": "remember-me",
   "private": true,
   "version": "0.0.0",
-  "description": "a Sails application",
+  "description": "Forever remember people that are no longer with us.",
   "dependencies": {
     "grunt": "0.4.1",
     "sails-disk": "~0.9.0",
